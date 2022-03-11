@@ -2,7 +2,7 @@
 
 Bypackt is a minecraft java edition hacked client<br>
 This client only supports minecraft version 1.12.2<br>
-To run the installer you will need to install Java-17<br>
+To run the installer you will need to install <a href="https://www.oracle.com/java/technologies/downloads/">Java-17</a><br>
 
 > You can download it on https://zerozipp.github.io/
 
