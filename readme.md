@@ -1,6 +1,7 @@
 # Bypackt
 
-<img src="https://img.shields.io/github/downloads/ZeroZipp/Bypackt/total" alt="dwnlds" />
+<img src="https://img.shields.io/github/downloads/ZeroZipp/Bypackt/total"/>
+<img src="https://img.shields.io/github/releases/ZeroZipp/Bypackt/total"/>
 
 Bypackt is a minecraft java edition hacked client<br>
 This client only supports minecraft version 1.12.2<br>
