@@ -1,7 +1,5 @@
 # Bypackt
 
-<img src="https://img.shields.io/github/downloads/ZeroZipp/Bypackt/total"/>
-
 Bypackt is a minecraft java edition hacked client<br>
 This client only supports minecraft version 1.12.2<br>
 To run the installer you will need to install <a href="https://www.oracle.com/java/technologies/downloads/">Java-17</a><br>
