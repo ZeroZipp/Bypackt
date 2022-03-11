@@ -27,4 +27,3 @@ A list of all commands:
 Please let me know if you have any <a href="https://github.com/ZeroZipp/Bypackt/issues">issues<a><br>
 Info and more can be foud on our <a href="https://discord.gg/ETaw5jfHwz">discord</a> server<br>
 You may check us on <a href="https://youtube.com/c/ZeroZipp">youtube</a><br>
-<img src="https://img.shields.io/github/issues/ZeroZipp/Bypackt/total"/>
