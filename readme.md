@@ -37,14 +37,14 @@ Minecraft eula:<br>
 > Basically, Mods are okay to distribute. hacked versions or Modded Versions of the Game client or server software are not okay to distribute.<br>
 
 MCP License<br>
-> You are allowed to:
-> Use MCP to decompile the Minecraft client and server jar files.
-> Use the decompiled source code to create mods for Minecraft.
-> Recompile modified versions of Minecraft.
-> Reobfuscate the classes of your mod for Minecraft.
-> You are NOT allowed to:
-> Use MCP to do anything that violated Mojangs terms of use for Minecraft.
-> Release Minecraft versions or modifications that allow you to play without having bought Minecraft from Mojang.
-> Make money with anything based on MCP (excluding Minecraft mods created by using MCP).
-> Use MCP to create clients that are used for griefing or exploiting server bugs.
-> Release the decompiled source code of Minecraft in any way.
+> You are allowed to:<br>
+> Use MCP to decompile the Minecraft client and server jar files.<br>
+> Use the decompiled source code to create mods for Minecraft.<br>
+> Recompile modified versions of Minecraft.<br>
+> Reobfuscate the classes of your mod for Minecraft.<br>
+> You are NOT allowed to:<br>
+> Use MCP to do anything that violated Mojangs terms of use for Minecraft.<br>
+> Release Minecraft versions or modifications that allow you to play without having bought Minecraft from Mojang.<br>
+> Make money with anything based on MCP (excluding Minecraft mods created by using MCP).<br>
+> Use MCP to create clients that are used for griefing or exploiting server bugs.<br>
+> Release the decompiled source code of Minecraft in any way.<br>
