@@ -12,10 +12,60 @@ import javax.swing.JTextField;
 
 public class Main {
 	public static void main(String[] args) {
-		JFrame frame = frame();
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(2);
-		frame.setVisible(true);
+		boolean run = !getOS().equalsIgnoreCase("UNKNOWN");
+		
+		if(run) {
+			JFrame frame = frame();
+			frame.setLocationRelativeTo(null);
+			frame.setDefaultCloseOperation(2);
+			frame.setVisible(true);
+		}else {
+			Logger.print("System not supported", Logger.INFO);
+			JFrame frame = info("System not supported", "Error", 260);
+			frame.setLocationRelativeTo(null);
+			frame.setDefaultCloseOperation(2);
+			frame.setVisible(true);
+		}
+	}
+	
+	public static String getOS() {
+        String name = System.getProperty("os.name").toLowerCase();
+        if (name.contains("windows")) {
+            return "WINDOWS";
+        }
+        if (name.contains("mac")) {
+            return "OSX";
+        }
+        if (name.contains("linux") || name.contains("solaris") || name.contains("sunos") || name.contains("unix")) {
+            return "LINUX";
+        }
+        return "UNKNOWN";
+    }
+	
+	public static JFrame info(String text, String title, int width) {
+		JFrame frame = new JFrame();
+		frame.setSize(width, 100);
+		frame.setResizable(false);
+		frame.setTitle(title);
+		
+		JPanel panel = new JPanel();
+        panel.setLayout(null);
+		
+		JLabel info = new JLabel(text);
+		info.setBounds(13, 18, 200, 25);
+		
+		JButton button = new JButton();
+		button.setText("OK");
+		button.setBounds(frame.getWidth()-60-9, frame.getHeight()-60-5, 60, 25);
+		button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	frame.dispose();
+            }
+        });
+		panel.add(button);
+		panel.add(info);
+		frame.add(panel);
+		return frame;
 	}
 	
 	public static JFrame frame() {
@@ -30,7 +80,13 @@ public class Main {
 		
 		
 		JTextField path = new JTextField();
-		path.setText(System.getProperty("user.home")+"/.minecraft/versions/1.12.2-Bypackt");
+		if(getOS().equalsIgnoreCase("LINUX")) {
+			path.setText(System.getProperty("user.home")+"/.minecraft/versions/1.12.2-Bypackt");
+		}else if(getOS().equalsIgnoreCase("WINDOWS")) {
+			path.setText(System.getenv("APPDATA")+"/.minecraft/versions/1.12.2-Bypackt");
+		}else if(getOS().equalsIgnoreCase("MAC")) {
+			path.setText(System.getProperty("user.home")+"/Library/Application Support/minecraft/versions/1.12.2-Bypackt");
+		}
 		path.setBounds(10, frame.getHeight()-60-5, frame.getWidth()-103, 25);
 		
 		JPanel info = new JPanel();
@@ -47,7 +103,7 @@ public class Main {
 		install.setBounds(frame.getWidth()-84-5, frame.getHeight()-60-5, 80, 25);
 		install.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Run install");
+                Logger.print("Run installer", Logger.INFO);
                 Download.run(path.getText(), "1.12.2-Bypackt.json", "https://github.com/ZeroZipp/Bypackt/releases/latest/download/1.12.2-Bypackt.json");
             }
         });  
