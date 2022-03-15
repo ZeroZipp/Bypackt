@@ -28,9 +28,8 @@ You may check us on <a href="https://youtube.com/c/ZeroZipp">youtube</a><br>
 
 ## License
 
-The client itself is not opensource,<br>
-it's just the installer<br>
-<b>You are using this client on your own risk!<b><br>
+This client is not open source<br>
+You are using this client on your own risk<br>
 
 Minecraft eula:<br>
 > When you combine your Mod with the Minecraft software, we will call that combination a "Modded Version" of the Game.<br>
