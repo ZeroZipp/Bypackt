@@ -21,10 +21,6 @@ public class Main {
 			frame.setVisible(true);
 		}else {
 			Logger.print("System not supported", Logger.INFO);
-			JFrame frame = info("System not supported", "Error", 260);
-			frame.setLocationRelativeTo(null);
-			frame.setDefaultCloseOperation(2);
-			frame.setVisible(true);
 		}
 	}
 	
@@ -41,32 +37,6 @@ public class Main {
         }
         return "UNKNOWN";
     }
-	
-	public static JFrame info(String text, String title, int width) {
-		JFrame frame = new JFrame();
-		frame.setSize(width, 100);
-		frame.setResizable(false);
-		frame.setTitle(title);
-		
-		JPanel panel = new JPanel();
-        panel.setLayout(null);
-		
-		JLabel info = new JLabel(text);
-		info.setBounds(13, 18, 200, 25);
-		
-		JButton button = new JButton();
-		button.setText("OK");
-		button.setBounds(frame.getWidth()-60-9, frame.getHeight()-60-5, 60, 25);
-		button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	frame.dispose();
-            }
-        });
-		panel.add(button);
-		panel.add(info);
-		frame.add(panel);
-		return frame;
-	}
 	
 	public static JFrame frame() {
 		JFrame frame = new JFrame();
