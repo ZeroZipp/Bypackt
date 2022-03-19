@@ -1,9 +1,9 @@
-#Bypackt
+# Bypackt
 
 Bypackt is a free and opensource hacked
 client for Minecraft (FML/Forge) 1.12.2
 
-##Install
+## Install
 
 As Bypackt is a FML/Forge client you
 need to place the `Bypackt.jar` in your
@@ -15,16 +15,16 @@ Windows:
 Linux:
 > ~/.minecraft/mods
 
-##GUI
+## GUI
 
 To open the ClickGUI press `Right Shift`
 on your keyboard
 
-##Commands
+## Commands
 
 There are no commands yet
 
-##Support
+## Support
 
 Please report any problems on the [Issues](https://github.com/ZeroZipp/Bypackt/issues)
 page of this repro or on our [Discord](https://discord.gg/ETaw5jfHwz)
