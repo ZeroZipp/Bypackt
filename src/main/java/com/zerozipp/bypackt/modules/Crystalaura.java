@@ -23,62 +23,35 @@ public class Crystalaura extends Module {
     public Crystalaura(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
         super(mcIn, nameIn, idIn, activeIn);
         list = new Object[][][][] {
-            {
-                {{"Mode"}, {1}},
-                {
-                    {0, "Single"},
-                    {1, "Multi"}
-                }
-            },
-            {
-                {{"Delay"}, {5}},
-                {
-                    {0, "0"},
-                    {1, "1"},
-                    {2, "2"},
-                    {3, "3"},
-                    {4, "4"},
-                    {5, "5"},
-                    {6, "6"},
-                    {7, "7"},
-                    {8, "8"},
-                    {9, "9"},
-                    {10, "10"},
-                    {11, "11"},
-                    {12, "12"},
-                    {13, "13"},
-                    {14, "14"},
-                    {15, "15"}
-                }
-            },
-            {
-                {{"Players"}, {true}},
-                {
-                    {false, "OFF"},
-                    {true, "ON"}
-                }
-            },
-            {
-                {{"Entitys"}, {true}},
-                {
-                    {false, "OFF"},
-                    {true, "ON"}
-                }
-            },
-            {
-                {{"Mobs"}, {true}},
-                {
-                    {false, "OFF"},
-                    {true, "ON"}
-                }
-            },
-            {
-                {{"Auto"}, {true}},
-                {
-                    {false, "OFF"},
-                    {true, "ON"}
-                }
-            }
+            {{{"Mode"}, {1}}, {
+                {0, "Single"},
+                {1, "Multi"}
+            }},
+            {{{"Ticks"}, {5}}, {
+                {0, "0"},
+                {5, "5"},
+                {10, "10"},
+                {15, "15"},
+                {20, "20"},
+                {25, "25"},
+                {30, "30"}
+            }},
+            {{{"Players"}, {true}}, {
+                {false, "OFF"},
+                {true, "ON"}
+            }},
+            {{{"Entitys"}, {true}}, {
+                {false, "OFF"},
+                {true, "ON"}
+            }},
+            {{{"Mobs"}, {true}}, {
+                {false, "OFF"},
+                {true, "ON"}
+            }},
+            {{{"Auto"}, {true}}, {
+                {false, "OFF"},
+                {true, "ON"}
+            }}
         };
     }
 
@@ -91,7 +64,7 @@ public class Crystalaura extends Module {
             }
         }if(indexIn == 1) {
             if ((int) list[indexIn][0][1][0] < list[indexIn][1].length-1) {
-                list[indexIn][0][1][0] = (int) list[indexIn][0][1][0] + 1;
+                list[indexIn][0][1][0] = (int) list[indexIn][0][1][0] + 5;
             } else {
                 list[indexIn][0][1][0] = 0;
             }
