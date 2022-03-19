@@ -12,9 +12,9 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.3'
+version = null
 group = 'com.zerozipp.bypackt'
-archivesBaseName = 'bypackt'
+archivesBaseName = 'Bypackt'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
@@ -42,12 +42,12 @@ dependencies {
 jar {
     manifest {
         attributes([
-            "Specification-Title": "bypackt",
-            "Specification-Vendor": "zerozipp",
+            "Specification-Title": "Bypackt",
+            "Specification-Vendor": "ZeroZipp",
             "Specification-Version": "1",
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"zerozipp",
+            "Implementation-Vendor" :"ZeroZipp",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }

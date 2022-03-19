@@ -88,7 +88,7 @@ public class Crystalaura extends Module {
             delay = 0;
         }
         for(Entity e : mc.world.loadedEntityList) {
-            if(((int) list[0][0][1][0] == 1 || ((int) list[0][0][1][0] == 0 && !hit)) && delay == 0) {
+            if(delay == 0) {
                 if((boolean) list[5][0][1][0]) {
                     if (e != mc.player && e instanceof EntityPlayer && (boolean) list[2][0][1][0]) {
                         autoPlace(e);
@@ -100,9 +100,11 @@ public class Crystalaura extends Module {
                         autoPlace(e);
                     }
                 }
-                if (e instanceof EntityEnderCrystal) {
-                    attack(e);
-                }
+            }
+        }
+        for(Entity e : mc.world.loadedEntityList) {
+            if (delay == 0 && ((int) list[0][0][1][0] == 1 || ((int) list[0][0][1][0] == 0 && !hit)) && e instanceof EntityEnderCrystal) {
+                attack(e);
             }
         }
     }
