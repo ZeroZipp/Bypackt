@@ -3,8 +3,7 @@
 Bypackt is a free and opensource hacked client for Minecraft (FML/Forge) 1.12.2
 
 Downloads:
-> Use the [Releases](https://github.com/ZeroZipp/Bypackt/releases)
-> Visit [Website](https://zerozipp.github.com/)
+> Visit [Releases](https://github.com/ZeroZipp/Bypackt/releases) or [Website](https://zerozipp.github.com/)
 
 ## Install
 
