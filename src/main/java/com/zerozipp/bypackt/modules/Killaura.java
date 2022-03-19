@@ -20,13 +20,12 @@ public class Killaura extends Module {
                 {1, "Multi"}
             }},
             {{{"Ticks"}, {2}}, {
-                {0, "0"},
-                {1, "5"},
-                {2, "10"},
-                {3, "15"},
-                {4, "20"},
-                {5, "25"},
-                {6, "30"}
+                {0, "Off"},
+                {1, "Fast"},
+                {2, "Normal"},
+                {3, "Smooth"},
+                {4, "Slow"},
+                {5, "Lazy"}
             }},
             {{{"Players"}, {true}}, {
                 {false, "OFF"},
@@ -45,7 +44,7 @@ public class Killaura extends Module {
 
     public void onUpdate() {
         hit = false;
-        if(delay < ((int)list[1][0][1][0]*5)-5) {
+        if(delay < (int)list[1][0][1][0]*10) {
             delay += 1;
         }else{
             delay = 0;
