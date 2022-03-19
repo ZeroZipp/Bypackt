@@ -82,16 +82,19 @@ public class Crystalaura extends Module {
         hit = false;
         place = false;
         for(Entity e : mc.world.loadedEntityList) {
-            if((int) list[0][0][1][0] == 1 || ((int) list[0][0][1][0] == 0 && !hit)) {
-                if (e instanceof EntityPlayer && (boolean) list[1][0][1][0]) {
-                    attack(e);
+            if(((int) list[0][0][1][0] == 1 || ((int) list[0][0][1][0] == 0 && !hit)) && (boolean) list[4][0][1][0]) {
+                if (e != mc.player && e instanceof EntityPlayer && (boolean) list[1][0][1][0]) {
+                    autoPlace(e);
                 }
                 if (e instanceof EntityLiving && !(e instanceof EntityMob) && (boolean) list[2][0][1][0]) {
-                    attack(e);
+                    autoPlace(e);
                 }
                 if (e instanceof EntityMob && (boolean) list[3][0][1][0]) {
-                    attack(e);
+                    autoPlace(e);
                 }
+            }
+            if (e instanceof EntityEnderCrystal) {
+                attack(e);
             }
         }
     }
