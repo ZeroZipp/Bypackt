@@ -63,7 +63,7 @@ public class Crystalaura extends Module {
                 list[indexIn][0][1][0] = 0;
             }
         }if(indexIn == 1) {
-            if ((int) list[indexIn][0][1][0] < list[indexIn][1].length-1) {
+            if ((int) list[indexIn][0][1][0] < (list[indexIn][1].length*5)-1) {
                 list[indexIn][0][1][0] = (int) list[indexIn][0][1][0] + 5;
             } else {
                 list[indexIn][0][1][0] = 0;
