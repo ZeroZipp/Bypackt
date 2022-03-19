@@ -27,14 +27,14 @@ public class Crystalaura extends Module {
                 {0, "Single"},
                 {1, "Multi"}
             }},
-            {{{"Ticks"}, {5}}, {
+            {{{"Ticks"}, {2}}, {
                 {0, "0"},
-                {5, "5"},
-                {10, "10"},
-                {15, "15"},
-                {20, "20"},
-                {25, "25"},
-                {30, "30"}
+                {1, "5"},
+                {2, "10"},
+                {3, "15"},
+                {4, "20"},
+                {5, "25"},
+                {6, "30"}
             }},
             {{{"Players"}, {true}}, {
                 {false, "OFF"},
@@ -63,8 +63,8 @@ public class Crystalaura extends Module {
                 list[indexIn][0][1][0] = 0;
             }
         }if(indexIn == 1) {
-            if ((int) list[indexIn][0][1][0] < (list[indexIn][1].length*5)-1) {
-                list[indexIn][0][1][0] = (int) list[indexIn][0][1][0] + 5;
+            if ((int) list[indexIn][0][1][0] < list[indexIn][1].length-1) {
+                list[indexIn][0][1][0] = (int) list[indexIn][0][1][0] + 1;
             } else {
                 list[indexIn][0][1][0] = 0;
             }
@@ -82,7 +82,7 @@ public class Crystalaura extends Module {
     public void onUpdate() {
         hit = false;
         place = false;
-        if(delay < (int)list[1][0][1][0]-1) {
+        if(delay < ((int)list[1][0][1][0]*5)-5) {
             delay += 1;
         }else{
             delay = 0;
