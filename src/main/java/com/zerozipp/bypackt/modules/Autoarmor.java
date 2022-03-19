@@ -11,20 +11,11 @@ public class Autoarmor extends Module {
     public Autoarmor(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
         super(mcIn, nameIn, idIn, activeIn);
         list = new Object[][][][] {
-            {
-                {{"Elytra"}, {false}},
-                {
-                    {false, "OFF"},
-                    {true, "ON"}
-                }
-            }
+            {{{"Elytra"}, {false}}, {
+                {false, "OFF"},
+                {true, "ON"}
+            }}
         };
-    }
-
-    public void runList(int indexIn) {
-        if(indexIn == 0) {
-            list[indexIn][0][1][0] = !((boolean) list[indexIn][0][1][0]);
-        }
     }
 
     public void onUpdate() {

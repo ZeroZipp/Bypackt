@@ -27,6 +27,15 @@ public class Module implements Comparable<Module> {
     }
 
     public void runList(int indexIn) {
+        if(list[indexIn][0][1][0] instanceof Integer) {
+            if ((int) list[indexIn][0][1][0] < list[indexIn][1].length-1) {
+                list[indexIn][0][1][0] = (int) list[indexIn][0][1][0] + 1;
+            } else {
+                list[indexIn][0][1][0] = 0;
+            }
+        }else if(list[indexIn][0][1][0] instanceof Boolean) {
+            list[indexIn][0][1][0] = !((boolean) list[indexIn][0][1][0]);
+        }
     }
 
     public void setActive(boolean activeIn) {

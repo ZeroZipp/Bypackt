@@ -43,28 +43,6 @@ public class Killaura extends Module {
         };
     }
 
-    public void runList(int indexIn) {
-        if(indexIn == 0) {
-            if ((int) list[indexIn][0][1][0] < list[indexIn][1].length-1) {
-                list[indexIn][0][1][0] = (int) list[indexIn][0][1][0] + 1;
-            } else {
-                list[indexIn][0][1][0] = 0;
-            }
-        }else if(indexIn == 1) {
-            if ((int) list[indexIn][0][1][0] < list[indexIn][1].length-1) {
-                list[indexIn][0][1][0] = (int) list[indexIn][0][1][0] + 1;
-            } else {
-                list[indexIn][0][1][0] = 0;
-            }
-        }else if(indexIn == 2) {
-            list[indexIn][0][1][0] = !((boolean) list[indexIn][0][1][0]);
-        }else if(indexIn == 3) {
-            list[indexIn][0][1][0] = !((boolean) list[indexIn][0][1][0]);
-        }else if(indexIn == 4) {
-            list[indexIn][0][1][0] = !((boolean) list[indexIn][0][1][0]);
-        }
-    }
-
     public void onUpdate() {
         hit = false;
         if(delay < ((int)list[1][0][1][0]*5)-5) {
