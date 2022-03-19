@@ -18,6 +18,7 @@ import net.minecraft.util.math.Vec3d;
 public class Crystalaura extends Module {
     private boolean hit = false;
     private boolean place = false;
+    private int delay = 0;
 
     public Crystalaura(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
         super(mcIn, nameIn, idIn, activeIn);
@@ -27,6 +28,27 @@ public class Crystalaura extends Module {
                 {
                     {0, "Single"},
                     {1, "Multi"}
+                }
+            },
+            {
+                {{"Delay"}, {5}},
+                {
+                    {0, "0"},
+                    {1, "1"},
+                    {2, "2"},
+                    {3, "3"},
+                    {4, "4"},
+                    {5, "5"},
+                    {6, "6"},
+                    {7, "7"},
+                    {8, "8"},
+                    {9, "9"},
+                    {10, "10"},
+                    {11, "11"},
+                    {12, "12"},
+                    {13, "13"},
+                    {14, "14"},
+                    {15, "15"}
                 }
             },
             {
@@ -67,13 +89,19 @@ public class Crystalaura extends Module {
             } else {
                 list[indexIn][0][1][0] = 0;
             }
-        }else if(indexIn == 1) {
-            list[indexIn][0][1][0] = !((boolean) list[indexIn][0][1][0]);
+        }if(indexIn == 1) {
+            if ((int) list[indexIn][0][1][0] < list[indexIn][1].length-1) {
+                list[indexIn][0][1][0] = (int) list[indexIn][0][1][0] + 1;
+            } else {
+                list[indexIn][0][1][0] = 0;
+            }
         }else if(indexIn == 2) {
             list[indexIn][0][1][0] = !((boolean) list[indexIn][0][1][0]);
         }else if(indexIn == 3) {
             list[indexIn][0][1][0] = !((boolean) list[indexIn][0][1][0]);
         }else if(indexIn == 4) {
+            list[indexIn][0][1][0] = !((boolean) list[indexIn][0][1][0]);
+        }else if(indexIn == 5) {
             list[indexIn][0][1][0] = !((boolean) list[indexIn][0][1][0]);
         }
     }
@@ -81,20 +109,27 @@ public class Crystalaura extends Module {
     public void onUpdate() {
         hit = false;
         place = false;
+        if(delay == (int)list[1][0][1][0]-1) {
+            delay += 1;
+        }else{
+            delay = 0;
+        }
         for(Entity e : mc.world.loadedEntityList) {
-            if(((int) list[0][0][1][0] == 1 || ((int) list[0][0][1][0] == 0 && !hit)) && (boolean) list[4][0][1][0]) {
-                if (e != mc.player && e instanceof EntityPlayer && (boolean) list[1][0][1][0]) {
-                    autoPlace(e);
+            if(((int) list[0][0][1][0] == 1 || ((int) list[0][0][1][0] == 0 && !hit)) && delay == 0) {
+                if((boolean) list[5][0][1][0]) {
+                    if (e != mc.player && e instanceof EntityPlayer && (boolean) list[2][0][1][0]) {
+                        autoPlace(e);
+                    }
+                    if (e instanceof EntityLiving && !(e instanceof EntityMob) && (boolean) list[3][0][1][0]) {
+                        autoPlace(e);
+                    }
+                    if (e instanceof EntityMob && (boolean) list[4][0][1][0]) {
+                        autoPlace(e);
+                    }
                 }
-                if (e instanceof EntityLiving && !(e instanceof EntityMob) && (boolean) list[2][0][1][0]) {
-                    autoPlace(e);
+                if (e instanceof EntityEnderCrystal) {
+                    attack(e);
                 }
-                if (e instanceof EntityMob && (boolean) list[3][0][1][0]) {
-                    autoPlace(e);
-                }
-            }
-            if (e instanceof EntityEnderCrystal) {
-                attack(e);
             }
         }
     }
@@ -103,7 +138,7 @@ public class Crystalaura extends Module {
         Vec3d pvec = e.getPositionVector();
         BlockPos pos = new BlockPos(pvec);
 
-        if(((boolean) list[4][0][1][0]) && mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem().equals(Items.END_CRYSTAL)) {
+        if(mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem().equals(Items.END_CRYSTAL)) {
             if(!place && e != mc.player) {
                 if(!e.isDead && e.isEntityAlive() && mc.player.getDistance(e) < 4) {
                     for(EnumFacing side : EnumFacing.values()) {
