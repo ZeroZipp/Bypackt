@@ -1,2 +1,4 @@
-export/
-bin/
+.gradle/
+.idea/
+build/
+run/
