@@ -109,7 +109,7 @@ public class Crystalaura extends Module {
     public void onUpdate() {
         hit = false;
         place = false;
-        if(delay == (int)list[1][0][1][0]-1) {
+        if(delay < (int)list[1][0][1][0]-1) {
             delay += 1;
         }else{
             delay = 0;

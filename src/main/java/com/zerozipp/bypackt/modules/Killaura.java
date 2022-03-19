@@ -91,7 +91,7 @@ public class Killaura extends Module {
 
     public void onUpdate() {
         hit = false;
-        if(delay == (int)list[1][0][1][0]-1) {
+        if(delay < (int)list[1][0][1][0]-1) {
             delay += 1;
         }else{
             delay = 0;
