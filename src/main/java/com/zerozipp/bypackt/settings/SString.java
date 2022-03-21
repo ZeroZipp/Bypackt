@@ -16,7 +16,7 @@ public class SString extends Setting {
 
     public void updateStr(boolean backIn) {
         if(!backIn) {
-            if(value <= list.length) {
+            if(value <= list.length-1) {
                 value += 1;
             }else{
                 value = 0;
@@ -25,7 +25,7 @@ public class SString extends Setting {
             if(value >= 0) {
                 value -= 1;
             }else{
-                value = list.length;
+                value = list.length-1;
             }
         }
     }

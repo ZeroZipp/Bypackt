@@ -19,7 +19,7 @@ public class SInteger extends Setting {
 
     public void updateInt(boolean backIn) {
         if(!backIn) {
-            if(value <= max[1]) {
+            if(value <= max[1]-1) {
                 value += 1;
             }else{
                 value = max[0];
@@ -28,7 +28,7 @@ public class SInteger extends Setting {
             if(value >= max[0]) {
                 value -= 1;
             }else{
-                value = max[1];
+                value = max[1]-1;
             }
         }
     }
