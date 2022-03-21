@@ -26,7 +26,7 @@ public class Gui extends Module {
     public Gui(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
         super(mcIn, nameIn, idIn, activeIn);
         settings = new Setting[] {
-            new SString("Color", 1, new String[] {
+            new SString("Color", 7, new String[] {
                 "Red", "Orange", "Yellow", "Treuse", "Green", "Spring", "Cyan", "Dodge", "Blue", "Purple", "Violet", "Rose"
             })
         };
