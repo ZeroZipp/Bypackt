@@ -1,7 +1,11 @@
 package com.zerozipp.bypackt.modules;
 
+import com.zerozipp.bypackt.Clickgui;
 import com.zerozipp.bypackt.Module;
 import com.zerozipp.bypackt.Overlay;
+import com.zerozipp.bypackt.settings.SBoolean;
+import com.zerozipp.bypackt.settings.SString;
+import com.zerozipp.bypackt.settings.Setting;
 import net.minecraft.client.Minecraft;
 
 public class Hud extends Module {
@@ -22,65 +26,25 @@ public class Hud extends Module {
 
     public Hud(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
         super(mcIn, nameIn, idIn, activeIn);
-        list = new Object[][][][] {
-                {
-                        {{"Color"}, {7}},
-                        {
-                                {0, "Red"},
-                                {1, "Orange"},
-                                {2, "Yellow"},
-                                {3, "Treuse"},
-                                {4, "Green"},
-                                {5, "Spring"},
-                                {6, "Cyan"},
-                                {7, "Dodge"},
-                                {8, "Blue"},
-                                {9, "Purple"},
-                                {10, "Violet"},
-                                {11, "Rose"}
-                        }
-                },
-                {
-                        {{"List"}, {true}},
-                        {
-                                {false, "OFF"},
-                                {true, "ON"}
-                        }
-                },
-                {
-                        {{"Info"}, {true}},
-                        {
-                                {false, "OFF"},
-                                {true, "ON"}
-                        }
-                }
+        settings = new Setting[] {
+                new SString("Color", 1, new String[] {
+                        "Red", "Orange", "Yellow", "Treuse", "Green", "Spring", "Cyan", "Dodge", "Blue", "Purple", "Violet", "Rose"
+                }),
+                new SBoolean("List", true),
+                new SBoolean("Info", true)
         };
     }
 
-    public void runList(int indexIn) {
-        if(indexIn == 0) {
-            if ((int) list[indexIn][0][1][0] < list[indexIn][1].length-1) {
-                list[indexIn][0][1][0] = (int) list[indexIn][0][1][0] + 1;
-            } else {
-                list[indexIn][0][1][0] = 0;
-            }
-        }else if(indexIn == 1) {
-            list[indexIn][0][1][0] = !((boolean) list[indexIn][0][1][0]);
-        }else if(indexIn == 2) {
-            list[indexIn][0][1][0] = !((boolean) list[indexIn][0][1][0]);
-        }
-    }
-
     public void onEnable() {
-        Overlay.color = (int)colors[(int)list[0][0][1][0]][0];
-        Overlay.list = (boolean)list[1][0][1][0];
-        Overlay.info = (boolean)list[2][0][1][0];
+        Clickgui.color = (int)colors[((SString)settings[0]).value][0];
+        Overlay.list = ((SBoolean)settings[1]).active;
+        Overlay.info = ((SBoolean)settings[2]).active;
     }
 
     public void onUpdate() {
-        Overlay.color = (int)colors[(int)list[0][0][1][0]][0];
-        Overlay.list = (boolean)list[1][0][1][0];
-        Overlay.info = (boolean)list[2][0][1][0];
+        Clickgui.color = (int)colors[((SString)settings[0]).value][0];
+        Overlay.list = ((SBoolean)settings[1]).active;
+        Overlay.info = ((SBoolean)settings[2]).active;
     }
 
     public void onDisable() {

@@ -1,5 +1,9 @@
 package com.zerozipp.bypackt;
 
+import com.zerozipp.bypackt.settings.SBoolean;
+import com.zerozipp.bypackt.settings.SInteger;
+import com.zerozipp.bypackt.settings.SString;
+import com.zerozipp.bypackt.settings.Setting;
 import net.minecraft.client.Minecraft;
 
 public class Module implements Comparable<Module> {
@@ -16,7 +20,7 @@ public class Module implements Comparable<Module> {
     public String hotkey;
     public boolean active;
     public boolean open;
-    public Object[][][][] list = {};
+    public Setting[] settings;
 
     public Module(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
         hotkey = "none";
@@ -27,14 +31,15 @@ public class Module implements Comparable<Module> {
     }
 
     public void runList(int indexIn) {
-        if(list[indexIn][0][1][0] instanceof Integer) {
-            if ((int) list[indexIn][0][1][0] < list[indexIn][1].length-1) {
-                list[indexIn][0][1][0] = (int) list[indexIn][0][1][0] + 1;
-            } else {
-                list[indexIn][0][1][0] = 0;
-            }
-        }else if(list[indexIn][0][1][0] instanceof Boolean) {
-            list[indexIn][0][1][0] = !((boolean) list[indexIn][0][1][0]);
+        if(settings[indexIn] instanceof SBoolean) {
+            SBoolean b = (SBoolean) settings[indexIn];
+            b.setBoolean(!b.active);
+        }else if(settings[indexIn] instanceof SInteger) {
+            SInteger b = (SInteger) settings[indexIn];
+            b.updateInt(false);
+        }else if(settings[indexIn] instanceof SString) {
+            SString b = (SString) settings[indexIn];
+            b.updateStr(false);
         }
     }
 

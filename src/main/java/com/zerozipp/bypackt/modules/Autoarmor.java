@@ -1,6 +1,9 @@
 package com.zerozipp.bypackt.modules;
 
 import com.zerozipp.bypackt.Module;
+import com.zerozipp.bypackt.settings.SBoolean;
+import com.zerozipp.bypackt.settings.SString;
+import com.zerozipp.bypackt.settings.Setting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ClickType;
@@ -10,17 +13,14 @@ import net.minecraft.inventory.Slot;
 public class Autoarmor extends Module {
     public Autoarmor(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
         super(mcIn, nameIn, idIn, activeIn);
-        list = new Object[][][][] {
-            {{{"Elytra"}, {false}}, {
-                {false, "OFF"},
-                {true, "ON"}
-            }}
+        settings = new Setting[] {
+                new SBoolean("Elytra", true)
         };
     }
 
     public void onUpdate() {
         if(!mc.player.hasItemInSlot(EntityEquipmentSlot.CHEST)) {
-            if((boolean) list[0][0][1][0]) {
+            if((boolean) ((SBoolean)settings[0]).active) {
                 for(Slot s : mc.player.inventoryContainer.inventorySlots) {
                     if(s.getStack().getItem() == Items.ELYTRA) {
                         mc.playerController.windowClick(mc.player.inventoryContainer.windowId, s.slotNumber, 0, ClickType.QUICK_MOVE, mc.player);

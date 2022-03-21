@@ -1,5 +1,9 @@
 package com.zerozipp.bypackt;
 
+import com.zerozipp.bypackt.settings.SBoolean;
+import com.zerozipp.bypackt.settings.SInteger;
+import com.zerozipp.bypackt.settings.SString;
+import com.zerozipp.bypackt.settings.Setting;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.fml.common.Mod;
 
@@ -83,22 +87,24 @@ public class Clickgui extends GuiScreen {
                     drawString(bypackt.font, m.name, xOff + (i * (size + 5)) + 5, yOff + (c * 18) + 5, (m.active) ? color : 16777215);
                     c += 1;
                     if(m.open) {
-                        for(Object[][][] module : m.list) {
-                            String mValue = "X";
-                            String mName = (String) module[0][0][0];
-                            for(Object[] obj : module[1]) {
-                                if(obj[0] instanceof String) {
-                                    if(obj[0].equals(module[0][1][0])) {
-                                        mValue = (String) obj[1];
-                                    }
+                        for(Setting setting : m.settings) {
+                            String SValue = "Null";
+                            if(setting instanceof SBoolean) {
+                                SBoolean b = (SBoolean) setting;
+                                if(b.active) {
+                                    SValue = "ON";
                                 }else{
-                                    if(obj[0] == module[0][1][0]) {
-                                        mValue = (String) obj[1];
-                                    }
+                                    SValue = "OFF";
                                 }
+                            }else if(setting instanceof SInteger) {
+                                SInteger b = (SInteger) setting;
+                                SValue = Integer.toString(b.value);
+                            }else if(setting instanceof SString) {
+                                SString b = (SString) setting;
+                                SValue = b.list[b.value];
                             }
                             drawRect(xOff + (i * (size + 5)), yOff + (c * 18), xOff + (i * (size + 5)) + size, yOff + (c * 18) + 18, 0x99111111);
-                            drawString(bypackt.font, mName + ": " + mValue, xOff + (i * (size + 5)) + 10, yOff + (c * 18) + 5, 16777215);
+                            drawString(bypackt.font, setting.name + ": " + SValue, xOff + (i * (size + 5)) + 10, yOff + (c * 18) + 5, 16777215);
                             c += 1;
                         }
                     }
@@ -130,7 +136,7 @@ public class Clickgui extends GuiScreen {
                         c += 1;
                         if(m.open) {
                             int g = 0;
-                            for(Object[][][] module : m.list) {
+                            for(Setting setting : m.settings) {
                                 if(mouseX > xOff + (i*(size + 5)) && mouseY > yOff + (c*18) && mouseX < xOff + (i*(size + 5)) + size && mouseY < yOff + (c*18) + 18) {
                                     m.runList(g);
                                 }
@@ -153,7 +159,7 @@ public class Clickgui extends GuiScreen {
                         }
                         c += 1;
                         if(m.open) {
-                            c += m.list.length;
+                            c += m.settings.length;
                         }
                     }
                 }

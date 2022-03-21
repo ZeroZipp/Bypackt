@@ -1,6 +1,10 @@
 package com.zerozipp.bypackt.modules;
 
 import com.zerozipp.bypackt.Module;
+import com.zerozipp.bypackt.settings.SBoolean;
+import com.zerozipp.bypackt.settings.SString;
+import com.zerozipp.bypackt.settings.Setting;
+import com.zerozipp.bypackt.util.Timer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -18,66 +22,40 @@ import net.minecraft.util.math.Vec3d;
 public class Crystalaura extends Module {
     private boolean hit = false;
     private boolean place = false;
-    private int delay = 0;
+    private Timer timer;
 
     public Crystalaura(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
         super(mcIn, nameIn, idIn, activeIn);
-        list = new Object[][][][] {
-            {{{"Mode"}, {1}}, {
-                {0, "Single"},
-                {1, "Multi"}
-            }},
-            {{{"Ticks"}, {2}}, {
-                {0, "Off"},
-                {1, "Fast"},
-                {2, "Normal"},
-                {3, "Smooth"},
-                {4, "Slow"},
-                {5, "Lazy"}
-            }},
-            {{{"Players"}, {true}}, {
-                {false, "OFF"},
-                {true, "ON"}
-            }},
-            {{{"Entitys"}, {true}}, {
-                {false, "OFF"},
-                {true, "ON"}
-            }},
-            {{{"Mobs"}, {true}}, {
-                {false, "OFF"},
-                {true, "ON"}
-            }},
-            {{{"Auto"}, {true}}, {
-                {false, "OFF"},
-                {true, "ON"}
-            }}
+        timer = new Timer();
+        settings = new Setting[] {
+            new SString("Mode", 1, new String[] {"Single", "Multi"}),
+            new SString("Delay", 2, new String[] {"Off", "Fast", "Normal", "Smooth", "Slow", "Lazy"}),
+            new SBoolean("Players", true),
+            new SBoolean("Entitys", true),
+            new SBoolean("Mobs", true),
+            new SBoolean("Auto", true)
         };
     }
 
     public void onUpdate() {
         hit = false;
         place = false;
-        if(delay < (int)list[1][0][1][0]*10) {
-            delay += 1;
-        }else{
-            delay = 0;
-        }
         for(Entity e : mc.world.loadedEntityList) {
-            if(delay == 0) {
-                if((boolean) list[5][0][1][0]) {
+            if(timer.hasTime(1000/(((SString)settings[1]).value*3), true)) {
+                if((boolean) ((SBoolean)settings[5]).active) {
                     if(e instanceof EntityEnderCrystal) {
-                        if (delay == 0 && ((int) list[0][0][1][0] == 1 || ((int) list[0][0][1][0] == 0 && !hit))) {
+                        if ((((SString)settings[0]).value == 1) || (((SString)settings[0]).value == 0 && !hit)) {
                             attack(e);
                         }
                     }
                     if(!e.isDead && e.isEntityAlive()) {
-                        if (e != mc.player && e instanceof EntityPlayer && (boolean) list[2][0][1][0]) {
+                        if (e != mc.player && e instanceof EntityPlayer && ((SBoolean)settings[2]).active) {
                             autoPlace(e);
                         }
-                        if (e instanceof EntityLiving && !(e instanceof EntityMob) && (boolean) list[3][0][1][0]) {
+                        if (e instanceof EntityLiving && !(e instanceof EntityMob) && ((SBoolean)settings[3]).active) {
                             autoPlace(e);
                         }
-                        if (e instanceof EntityMob && (boolean) list[4][0][1][0]) {
+                        if (e instanceof EntityMob && ((SBoolean)settings[4]).active) {
                             autoPlace(e);
                         }
                     }
