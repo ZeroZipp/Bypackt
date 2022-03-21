@@ -32,7 +32,7 @@ public class Killaura extends Module {
     public void onUpdate() {
         hit = false;
         for(Entity e : mc.world.loadedEntityList) {
-            if((((SString)settings[0]).value == 1 || (((SString)settings[0]).value == 0 && !hit)) && timer.hasTime(((SString)settings[1]).value, true)) {
+            if((((SString)settings[0]).value == 1 || (((SString)settings[0]).value == 0 && !hit)) && timer.hasTime(((SString)settings[1]).value*5)) {
                 if(e instanceof EntityPlayer && ((SBoolean)settings[2]).active) {
                     attack(e);
                 }

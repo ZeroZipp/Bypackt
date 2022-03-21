@@ -3,23 +3,18 @@ package com.zerozipp.bypackt.util;
 import net.minecraft.client.Minecraft;
 
 public class Timer {
-    public long lastMS;
+    public long tick;
 
     public Timer() {
-        lastMS = Minecraft.getSystemTime();
+        tick = 0;
     }
 
-    public void reset() {
-        lastMS = Minecraft.getSystemTime();
-    }
-
-    public boolean hasTime(long time, boolean reset) {
-        if(Minecraft.getSystemTime()-lastMS > time) {
-            if(reset) {
-                reset();
-            }
+    public boolean hasTime(long time) {
+        if(tick >= time) {
+            tick = 0;
             return true;
         }
+        tick += 1;
         return false;
     }
 }
