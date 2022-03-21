@@ -10,6 +10,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityEnderCrystal;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -41,18 +42,18 @@ public class Crystalaura extends Module {
         hit = false;
         place = false;
         for(Entity e : mc.world.loadedEntityList) {
-            if(timer.hasTime(1000/(((SString)settings[1]).value*3), true)) {
-                if((boolean) ((SBoolean)settings[5]).active) {
-                    if(e instanceof EntityEnderCrystal) {
-                        if ((((SString)settings[0]).value == 1) || (((SString)settings[0]).value == 0 && !hit)) {
-                            attack(e);
-                        }
+            if(timer.hasTime(((SString)settings[1]).value, true)) {
+                if(e instanceof EntityEnderCrystal) {
+                    if (((SString)settings[0]).value == 1 || (((SString)settings[0]).value == 0 && !hit)) {
+                        attack(e);
                     }
+                }
+                if(((SBoolean)settings[5]).active) {
                     if(!e.isDead && e.isEntityAlive()) {
-                        if (e != mc.player && e instanceof EntityPlayer && ((SBoolean)settings[2]).active) {
+                        if (e instanceof EntityPlayer && ((SBoolean)settings[2]).active) {
                             autoPlace(e);
                         }
-                        if (e instanceof EntityLiving && !(e instanceof EntityMob) && ((SBoolean)settings[3]).active) {
+                        if (e instanceof EntityAnimal && ((SBoolean)settings[3]).active) {
                             autoPlace(e);
                         }
                         if (e instanceof EntityMob && ((SBoolean)settings[4]).active) {
@@ -121,13 +122,11 @@ public class Crystalaura extends Module {
     }
 
     public void attack(Entity e) {
-        if(e != mc.player) {
-            if(!e.isDead && e.isEntityAlive() && mc.player.getDistance(e) < 4) {
-                mc.playerController.attackEntity(mc.player, e);
-                mc.player.swingArm(EnumHand.MAIN_HAND);
-                mc.player.resetCooldown();
-                hit = true;
-            }
+        if(!e.isDead && e.isEntityAlive() && mc.player.getDistance(e) < 4) {
+            mc.playerController.attackEntity(mc.player, e);
+            mc.player.swingArm(EnumHand.MAIN_HAND);
+            mc.player.resetCooldown();
+            hit = true;
         }
     }
 }
