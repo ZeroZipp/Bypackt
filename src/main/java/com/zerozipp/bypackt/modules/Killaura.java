@@ -31,29 +31,30 @@ public class Killaura extends Module {
 
     public void onUpdate() {
         hit = false;
-        for(Entity e : mc.world.loadedEntityList) {
-            if((((SString)settings[0]).value == 1 || (((SString)settings[0]).value == 0 && !hit)) && timer.hasTime(((SString)settings[1]).value*5)) {
-                if(e instanceof EntityPlayer && ((SBoolean)settings[2]).active) {
-                    attack(e);
-                }
-                if(e instanceof EntityAnimal && ((SBoolean)settings[3]).active) {
-                    attack(e);
-                }
-                if(e instanceof EntityMob && ((SBoolean)settings[4]).active) {
-                    attack(e);
+        if(timer.hasTime(((SString)settings[1]).value*2)) {
+            for(Entity e : mc.world.loadedEntityList) {
+                if(!hit && e != mc.player) {
+                    if(mc.player.getDistance(e) < 4) {
+                        if(e instanceof EntityPlayer && ((SBoolean) settings[2]).active) {
+                            attack(e);
+                        }
+                        if(e instanceof EntityAnimal && ((SBoolean) settings[3]).active) {
+                            attack(e);
+                        }
+                        if(e instanceof EntityMob && ((SBoolean) settings[4]).active) {
+                            attack(e);
+                        }
+                    }
                 }
             }
         }
     }
 
     public void attack(Entity e) {
-        if(e != mc.player) {
-            if(!e.isDead && e.isEntityAlive() && mc.player.getDistance(e) < 4) {
-                mc.playerController.attackEntity(mc.player, e);
-                mc.player.swingArm(EnumHand.MAIN_HAND);
-                mc.player.resetCooldown();
-                hit = true;
-            }
+        if(!e.isDead && e.isEntityAlive()) {
+            hit = (((SString) settings[0]).value == 0) ? true : hit;
+            mc.playerController.attackEntity(mc.player, e);
+            mc.player.swingArm(EnumHand.MAIN_HAND);
         }
     }
 }
