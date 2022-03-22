@@ -8,19 +8,19 @@ import com.zerozipp.bypackt.settings.Setting;
 import net.minecraft.client.Minecraft;
 
 public class Gui extends Module {
-    public Object[][] colors = {
-        {0xf0ff0000, "Red"},
-        {0xf0ff8000, "Orange"},
-        {0xf0ffff00, "Yellow"},
-        {0xf080ff00, "Treuse"},
-        {0xf000ff00, "Green"},
-        {0xf000ff80, "Spring"},
-        {0xf000ffff, "Cyan"},
-        {0xf00080ff, "Dodger"},
-        {0xf00000ff, "Blue"},
-        {0xf08000ff, "Purple"},
-        {0xf0ff00ff, "Violet"},
-        {0xf0ff0080, "Magenta"}
+    public Object[] colors = {
+            0xf0ff0000,
+            0xf0ff8000,
+            0xf0ffff00,
+            0xf080ff00,
+            0xf000ff00,
+            0xf000ff80,
+            0xf000ffff,
+            0xf00080ff,
+            0xf00000ff,
+            0xf08000ff,
+            0xf0ff00ff,
+            0xf0ff0080
     };
 
     public Gui(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
@@ -33,11 +33,11 @@ public class Gui extends Module {
     }
 
     public void onEnable() {
-        Clickgui.color = (int)colors[((SString)settings[0]).value][0];
+        Clickgui.color = (int)colors[((SString)settings[0]).value];
     }
 
     public void onUpdate() {
-        Clickgui.color = (int)colors[((SString)settings[0]).value][0];
+        Clickgui.color = (int)colors[((SString)settings[0]).value];
     }
 
     public void onDisable() {
