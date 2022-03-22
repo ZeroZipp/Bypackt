@@ -82,11 +82,11 @@ public class Bypackt {
     public void onOverlay() {
         if(mc.world != null) {
             overlay.onUpdate();
-            onKeyPress();
+            onGui();
         }
     }
 
-    public void onKeyPress() {
+    public void onGui() {
         if(Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
             if(mc.currentScreen == null) {
                 mc.displayGuiScreen(new Clickgui(modules, getBypackt()));

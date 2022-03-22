@@ -1,6 +1,5 @@
 package com.zerozipp.bypackt.modules;
 
-import com.zerozipp.bypackt.Clickgui;
 import com.zerozipp.bypackt.Module;
 import com.zerozipp.bypackt.Overlay;
 import com.zerozipp.bypackt.settings.SBoolean;

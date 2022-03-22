@@ -68,8 +68,9 @@ public class Module implements Comparable<Module> {
     public void onDisable() {
     }
 
-    public void setHotkey(String key) {
+    public boolean setHotkey(String key) {
         hotkey = key;
+        return true;
     }
 
     @Override
