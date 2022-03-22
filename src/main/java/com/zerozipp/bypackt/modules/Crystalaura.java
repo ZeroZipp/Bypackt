@@ -65,18 +65,19 @@ public class Crystalaura extends Module {
                     }
                 }
             }
-
             if(((SBoolean) settings[5]).active) {
                 for (Entity e : others) {
-                    if (e != mc.player && !hit) {
-                        if (e instanceof EntityPlayer && ((SBoolean) settings[2]).active) {
-                            autoPlace(e);
-                        }
-                        if (e instanceof EntityAnimal && ((SBoolean) settings[3]).active) {
-                            autoPlace(e);
-                        }
-                        if (e instanceof EntityMob && ((SBoolean) settings[4]).active) {
-                            autoPlace(e);
+                    if(mc.player.getDistance(e) < 4) {
+                        if (e != mc.player && !hit) {
+                            if (e instanceof EntityPlayer && ((SBoolean) settings[2]).active) {
+                                autoPlace(e);
+                            }
+                            if (e instanceof EntityAnimal && ((SBoolean) settings[3]).active) {
+                                autoPlace(e);
+                            }
+                            if (e instanceof EntityMob && ((SBoolean) settings[4]).active) {
+                                autoPlace(e);
+                            }
                         }
                     }
                 }
