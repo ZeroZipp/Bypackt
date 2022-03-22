@@ -1,6 +1,8 @@
 package com.zerozipp.bypackt.modules;
 
 import com.zerozipp.bypackt.Module;
+import com.zerozipp.bypackt.settings.SString;
+import com.zerozipp.bypackt.settings.Setting;
 import com.zerozipp.bypackt.util.Rotation;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Minecraft;
@@ -16,6 +18,9 @@ import net.minecraft.util.math.Vec3d;
 public class Scaffold extends Module {
     public Scaffold(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
         super(mcIn, nameIn, idIn, activeIn);
+        settings = new Setting[] {
+                new SString("Mode", 0, new String[] {"Normal", "Legit"})
+        };
     }
 
     public void onUpdate() {
@@ -24,15 +29,19 @@ public class Scaffold extends Module {
         if(mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemBlock) {
             if(mc.world.getBlockState(pos).getMaterial().isReplaceable()) {
                 if(!place(pos)) {
-                    for(EnumFacing side : EnumFacing.values()) {
-                        if(!side.equals(EnumFacing.UP) && !side.equals(EnumFacing.DOWN)) {
-                            if(mc.world.getBlockState(pos.offset(side)).getMaterial().isReplaceable()) {
-                                if(place(pos.offset(side))) {
-                                    place(pos);
-                                    return;
+                    if(((SString)settings[0]).value == 0) {
+                        for (EnumFacing side : EnumFacing.values()) {
+                            if (!side.equals(EnumFacing.UP) && !side.equals(EnumFacing.DOWN)) {
+                                if (mc.world.getBlockState(pos.offset(side)).getMaterial().isReplaceable()) {
+                                    if (place(pos.offset(side))) {
+                                        place(pos);
+                                        return;
+                                    }
                                 }
                             }
                         }
+                    }else if(((SString)settings[0]).value == 1) {
+                        return;
                     }
                 }
             }

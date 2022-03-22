@@ -5,8 +5,6 @@ import com.zerozipp.bypackt.settings.SInteger;
 import com.zerozipp.bypackt.settings.SString;
 import com.zerozipp.bypackt.settings.Setting;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraftforge.fml.common.Mod;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,33 +12,19 @@ import java.util.Collections;
 public class Clickgui extends GuiScreen {
     public static int color = 0xf00080ff;
     public static int size = 90;
-    public static boolean[] active = {
-            true,
-            true,
-            true,
-            true,
-            true,
-            true
-    };
-
     public Bypackt bypackt;
     public ArrayList<Module> modules;
-    public ArrayList[] list = {
-            new ArrayList<Module>(),
-            new ArrayList<Module>(),
-            new ArrayList<Module>(),
-            new ArrayList<Module>(),
-            new ArrayList<Module>(),
-            new ArrayList<Module>()
-    };
     public int xOff, yOff;
-    public String[] names = {
-            "Movement",
-            "Auto",
-            "Render",
-            "Combat",
-            "World",
-            "Screen"
+    public ArrayList<ArrayList<Module>> list = new ArrayList<>();
+    public ArrayList<Boolean> active = new ArrayList<>();
+    public ArrayList<String> names = new ArrayList<>();
+    public Object[][] module = {
+            {new ArrayList<Module>(), "Movement", true},
+            {new ArrayList<Module>(), "Auto", true},
+            {new ArrayList<Module>(), "Render", true},
+            {new ArrayList<Module>(), "Combat", true},
+            {new ArrayList<Module>(), "World", true},
+            {new ArrayList<Module>(), "Screen", true}
     };
 
     public Clickgui(ArrayList<Module> modulesIn, Bypackt bypacktIn) {
@@ -48,19 +32,24 @@ public class Clickgui extends GuiScreen {
         modules = modulesIn;
         xOff = 38;
         yOff = 38;
+        for(Object[] l : module) {
+            list.add((ArrayList<Module>)l[0]);
+            names.add((String)l[1]);
+            active.add((Boolean)l[2]);
+        }
         for(Module m : modules) {
             if(m.id == Module.MOVEMENT) {
-                list[0].add(m);
+                list.get(0).add(m);
             }else if(m.id == Module.AUTO) {
-                list[1].add(m);
+                list.get(1).add(m);
             }else if(m.id == Module.RENDER) {
-                list[2].add(m);
+                list.get(2).add(m);
             }else if(m.id == Module.COMBAT) {
-                list[3].add(m);
+                list.get(3).add(m);
             }else if(m.id == Module.WORLD) {
-                list[4].add(m);
+                list.get(4).add(m);
             }else if(m.id == Module.SCREEN) {
-                list[5].add(m);
+                list.get(5).add(m);
             }
         }
         for(ArrayList<Module> l : list) {
@@ -78,10 +67,10 @@ public class Clickgui extends GuiScreen {
             c += 1;
         }
 
-        for(int i = 0; i < list.length; i++) {
+        for(int i = 0; i < list.size(); i++) {
             c = 1;
-            if(active[i]) {
-                for(Object n : list[i]) {
+            if(active.get(i)) {
+                for(Object n : list.get(i)) {
                     Module m = (Module) n;
                     drawRect(xOff + (i * (size + 5)), yOff + (c * 18), xOff + (i * (size + 5)) + size, yOff + (c * 18) + 18, 0x99000000);
                     drawString(bypackt.font, m.name, xOff + (i * (size + 5)) + 5, yOff + (c * 18) + 5, (m.active) ? color : 16777215);
@@ -118,17 +107,17 @@ public class Clickgui extends GuiScreen {
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         if(mouseButton == 0) {
             int c = 0;
-            for(int i = 0; i < active.length; i++) {
+            for(int i = 0; i < active.size(); i++) {
                 if (mouseX > xOff + (i * (size + 5)) && mouseY > yOff + (c * 18) && mouseX < xOff + (i * (size + 5)) + size && mouseY < yOff + (c * 18) + 18) {
-                    active[i] = !active[i];
+                    active.set(i, !active.get(i));
                     c += 1;
                 }
             }
 
-            for(int i = 0; i < list.length; i++) {
+            for(int i = 0; i < list.size(); i++) {
                 c = 1;
-                if(active[i]) {
-                    for(Object n : list[i]) {
+                if(active.get(i)) {
+                    for(Object n : list.get(i)) {
                         Module m = (Module) n;
                         if(mouseX > xOff + (i*(size + 5)) && mouseY > yOff + (c*18) && mouseX < xOff + (i*(size + 5)) + size && mouseY < yOff + (c*18) + 18) {
                             m.setActive(!m.active);
@@ -149,10 +138,10 @@ public class Clickgui extends GuiScreen {
             }
         }
         if(mouseButton == 1) {
-            for(int i = 0; i < list.length; i++) {
+            for(int i = 0; i < list.size(); i++) {
                 int c = 1;
-                if(active[i]) {
-                    for(Object n : list[i]) {
+                if(active.get(i)) {
+                    for(Object n : list.get(i)) {
                         Module m = (Module) n;
                         if(mouseX > xOff + (i*(size + 5)) && mouseY > yOff + (c*18) && mouseX < xOff + (i*(size + 5)) + size && mouseY < yOff + (c*18) + 18) {
                             if(m.settings != null) {

@@ -8,7 +8,6 @@ import com.zerozipp.bypackt.util.Rotation;
 import com.zerozipp.bypackt.util.Timer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityEnderCrystal;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -21,9 +20,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class Crystalaura extends Module {
     private boolean hit = false;
