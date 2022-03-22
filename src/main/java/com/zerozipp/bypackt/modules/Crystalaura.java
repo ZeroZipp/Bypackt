@@ -42,14 +42,13 @@ public class Crystalaura extends Module {
         hit = false;
         place = false;
 
-        if(timer.hasTime(((SString)settings[1]).value*100)) {
+        if(timer.hasTime(((SString)settings[1]).value*250)) {
             for(Entity e : mc.world.loadedEntityList) {
                 if(mc.player.getDistance(e) < 4) {
-                    if(e instanceof EntityEnderCrystal) {
-                        if(!hit) {
-                            attack(e);
-                        }
-                    }else if(((SBoolean) settings[5]).active && e != mc.player) {
+                    if(e instanceof EntityEnderCrystal && !hit && !place) {
+                        attack(e);
+                    }
+                    if(((SBoolean) settings[5]).active && e != mc.player && !hit) {
                         if(e instanceof EntityPlayer && ((SBoolean) settings[2]).active) {
                             autoPlace(e);
                         }
