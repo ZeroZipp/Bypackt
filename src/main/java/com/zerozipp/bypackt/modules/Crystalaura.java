@@ -42,7 +42,7 @@ public class Crystalaura extends Module {
         hit = false;
         place = false;
 
-        if(timer.hasTime(((SString)settings[1]).value*2)) {
+        if(timer.hasTime(((SString)settings[1]).value*10)) {
             for(Entity e : mc.world.loadedEntityList) {
                 if(mc.player.getDistance(e) < 4) {
                     if(e instanceof EntityEnderCrystal) {

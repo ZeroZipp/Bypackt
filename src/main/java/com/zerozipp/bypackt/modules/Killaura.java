@@ -31,7 +31,7 @@ public class Killaura extends Module {
 
     public void onUpdate() {
         hit = false;
-        if(timer.hasTime(((SString)settings[1]).value*2)) {
+        if(timer.hasTime(((SString)settings[1]).value*10)) {
             for(Entity e : mc.world.loadedEntityList) {
                 if(!hit && e != mc.player) {
                     if(mc.player.getDistance(e) < 4) {
