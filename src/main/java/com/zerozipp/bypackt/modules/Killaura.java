@@ -21,7 +21,7 @@ public class Killaura extends Module {
         super(mcIn, nameIn, idIn, activeIn);
         timer = new Timer();
         settings = new Setting[] {
-            new SString("Mode", 1, new String[] {"Single", "Multi"}),
+            new SString("Mode", 0, new String[] {"Single", "Multi"}),
             new SString("Delay", 2, new String[] {"Off", "Fast", "Normal", "Smooth", "Slow", "Lazy"}),
             new SBoolean("Players", true),
             new SBoolean("Entitys", true),
@@ -31,7 +31,7 @@ public class Killaura extends Module {
 
     public void onUpdate() {
         hit = false;
-        if(timer.hasTime(((SString)settings[1]).value*10)) {
+        if(timer.hasTime(((SString)settings[1]).value*100)) {
             for(Entity e : mc.world.loadedEntityList) {
                 if(!hit && e != mc.player) {
                     if(mc.player.getDistance(e) < 4) {

@@ -14,7 +14,7 @@ public class Autoarmor extends Module {
     public Autoarmor(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
         super(mcIn, nameIn, idIn, activeIn);
         settings = new Setting[] {
-                new SBoolean("Elytra", true)
+                new SBoolean("Elytra", false)
         };
     }
 
