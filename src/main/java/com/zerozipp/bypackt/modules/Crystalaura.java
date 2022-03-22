@@ -4,6 +4,7 @@ import com.zerozipp.bypackt.Module;
 import com.zerozipp.bypackt.settings.SBoolean;
 import com.zerozipp.bypackt.settings.SString;
 import com.zerozipp.bypackt.settings.Setting;
+import com.zerozipp.bypackt.util.Rotation;
 import com.zerozipp.bypackt.util.Timer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -14,6 +15,7 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -102,6 +104,10 @@ public class Crystalaura extends Module {
             for (EnumHand enumhand : EnumHand.values()) {
                 ItemStack itemstack = mc.player.getHeldItem(enumhand);
                 int i = itemstack.getCount();
+
+                Rotation rot = Rotation.getLook(mc.player, new Vec3d(pos));
+                mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rot.yaw, rot.pitch, true));
+
                 EnumActionResult enumactionresult = mc.playerController.processRightClickBlock(mc.player, mc.world, pos, side, Vec3d.ZERO, EnumHand.MAIN_HAND);
 
                 if(enumactionresult == EnumActionResult.SUCCESS) {
@@ -120,6 +126,9 @@ public class Crystalaura extends Module {
 
     public void attack(Entity e) {
         if(!e.isDead && e.isEntityAlive()) {
+            Rotation rot = Rotation.getLook(mc.player, e.getPositionVector().add(new Vec3d(0, 1, 0)));
+            mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rot.yaw, rot.pitch, true));
+
             hit = (((SString) settings[0]).value == 0) ? true : hit;
             mc.playerController.attackEntity(mc.player, e);
             mc.player.swingArm(EnumHand.MAIN_HAND);

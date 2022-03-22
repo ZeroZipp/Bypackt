@@ -4,6 +4,7 @@ import com.zerozipp.bypackt.Module;
 import com.zerozipp.bypackt.settings.SBoolean;
 import com.zerozipp.bypackt.settings.SString;
 import com.zerozipp.bypackt.settings.Setting;
+import com.zerozipp.bypackt.util.Rotation;
 import com.zerozipp.bypackt.util.Timer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -11,7 +12,9 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.Vec3d;
 
 public class Killaura extends Module {
     private boolean hit = false;
@@ -52,6 +55,9 @@ public class Killaura extends Module {
 
     public void attack(Entity e) {
         if(!e.isDead && e.isEntityAlive()) {
+            Rotation rot = Rotation.getLook(mc.player, e.getPositionVector().add(new Vec3d(0, e.getEyeHeight(), 0)));
+            mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rot.yaw, rot.pitch, true));
+
             hit = (((SString) settings[0]).value == 0) ? true : hit;
             mc.playerController.attackEntity(mc.player, e);
             mc.player.swingArm(EnumHand.MAIN_HAND);

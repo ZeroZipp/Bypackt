@@ -10,7 +10,7 @@ public class Nofall extends Module {
     public Nofall(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
         super(mcIn, nameIn, idIn, activeIn);
         settings = new Setting[] {
-                new SString("Mode", 7, new String[] {"Normal", "Fixed"})
+                new SString("Mode", 0, new String[] {"Normal", "Fixed"})
         };
     }
 

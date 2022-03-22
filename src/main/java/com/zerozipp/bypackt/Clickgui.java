@@ -86,7 +86,7 @@ public class Clickgui extends GuiScreen {
                     drawRect(xOff + (i * (size + 5)), yOff + (c * 18), xOff + (i * (size + 5)) + size, yOff + (c * 18) + 18, 0x99000000);
                     drawString(bypackt.font, m.name, xOff + (i * (size + 5)) + 5, yOff + (c * 18) + 5, (m.active) ? color : 16777215);
                     c += 1;
-                    if(m.open && m.settings.length > 0) {
+                    if(m.open && m.settings != null) {
                         for(Setting setting : m.settings) {
                             String SValue = "Null";
                             if(setting instanceof SBoolean) {
@@ -134,7 +134,7 @@ public class Clickgui extends GuiScreen {
                             m.setActive(!m.active);
                         }
                         c += 1;
-                        if(m.open && m.settings.length > 0) {
+                        if(m.open && m.settings != null) {
                             int g = 0;
                             for(Setting setting : m.settings) {
                                 if(mouseX > xOff + (i*(size + 5)) && mouseY > yOff + (c*18) && mouseX < xOff + (i*(size + 5)) + size && mouseY < yOff + (c*18) + 18) {
@@ -155,12 +155,12 @@ public class Clickgui extends GuiScreen {
                     for(Object n : list[i]) {
                         Module m = (Module) n;
                         if(mouseX > xOff + (i*(size + 5)) && mouseY > yOff + (c*18) && mouseX < xOff + (i*(size + 5)) + size && mouseY < yOff + (c*18) + 18) {
-                            if(m.settings.length > 0) {
+                            if(m.settings != null) {
                                 m.open = !m.open;
                             }
                         }
                         c += 1;
-                        if(m.open) {
+                        if(m.open && m.settings != null) {
                             c += m.settings.length;
                         }
                     }

@@ -1,10 +1,12 @@
 package com.zerozipp.bypackt.modules;
 
 import com.zerozipp.bypackt.Module;
+import com.zerozipp.bypackt.util.Rotation;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -46,6 +48,10 @@ public class Scaffold extends Module {
                 for (EnumHand enumhand : EnumHand.values()) {
                     ItemStack itemstack = mc.player.getHeldItem(enumhand);
                     int i = itemstack.getCount();
+
+                    Rotation rot = Rotation.getLook(mc.player, new Vec3d(neighbor));
+                    mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rot.yaw, rot.pitch, true));
+
                     EnumActionResult enumactionresult = mc.playerController.processRightClickBlock(mc.player, mc.world, neighbor, side2, Vec3d.ZERO, EnumHand.MAIN_HAND);
 
                     if(enumactionresult == EnumActionResult.SUCCESS) {
