@@ -22,6 +22,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Crystalaura extends Module {
     private boolean hit = false;
     private boolean place = false;
@@ -44,20 +47,35 @@ public class Crystalaura extends Module {
         hit = false;
         place = false;
 
+        ArrayList<EntityEnderCrystal> crystals = new ArrayList<EntityEnderCrystal>();
+        ArrayList<Entity> others = new ArrayList<Entity>();
+        for(Entity entity : mc.world.loadedEntityList) {
+            if(entity instanceof EntityEnderCrystal) {
+                crystals.add((EntityEnderCrystal)entity);
+            }else{
+                others.add(entity);
+            }
+        }
+
         if(timer.hasTime(((SString)settings[1]).value*250)) {
-            for(Entity e : mc.world.loadedEntityList) {
+            for(EntityEnderCrystal e : crystals) {
                 if(mc.player.getDistance(e) < 4) {
-                    if(e instanceof EntityEnderCrystal && !hit && !place) {
+                    if(!hit && !place) {
                         attack(e);
                     }
-                    if(((SBoolean) settings[5]).active && e != mc.player && !hit) {
-                        if(e instanceof EntityPlayer && ((SBoolean) settings[2]).active) {
+                }
+            }
+
+            if(((SBoolean) settings[5]).active) {
+                for (Entity e : others) {
+                    if (e != mc.player && !hit) {
+                        if (e instanceof EntityPlayer && ((SBoolean) settings[2]).active) {
                             autoPlace(e);
                         }
-                        if(e instanceof EntityAnimal && ((SBoolean) settings[3]).active) {
+                        if (e instanceof EntityAnimal && ((SBoolean) settings[3]).active) {
                             autoPlace(e);
                         }
-                        if(e instanceof EntityMob && ((SBoolean) settings[4]).active) {
+                        if (e instanceof EntityMob && ((SBoolean) settings[4]).active) {
                             autoPlace(e);
                         }
                     }
