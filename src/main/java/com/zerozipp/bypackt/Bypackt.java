@@ -8,6 +8,7 @@ import net.minecraft.client.resources.SimpleReloadableResourceManager;
 import net.minecraft.client.resources.data.MetadataSerializer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -26,14 +27,14 @@ public class Bypackt {
         return this;
     }
 
-    public Bypackt(Minecraft mcIn) {
+    public Bypackt(Minecraft mcIn) throws IOException {
         name = "Bypackt";
         version = "1.3";
         mc = mcIn;
         overlay = new Overlay(mc, getBypackt());
     }
 
-    public void onLoad() {
+    public void onLoad() throws IOException {
         fontLocation = new ResourceLocation("bypackt", "textures/font/bypackt.png");
         font = new FontRenderer(mc.gameSettings, fontLocation, mc.renderEngine, false);
         this.resourceManager = new SimpleReloadableResourceManager(metadataSerializer);

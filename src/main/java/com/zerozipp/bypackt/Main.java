@@ -2,15 +2,18 @@ package com.zerozipp.bypackt;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.apache.logging.log4j.Logger;
+
+import java.io.IOException;
 
 @Mod(modid = "bypackt", name = "Bypackt", version = "1.3")
 public class Main {
@@ -19,14 +22,14 @@ public class Main {
     public static Bypackt bypackt;
 
     @EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
+    public void preInit(FMLPreInitializationEvent event) throws IOException {
         mc = Minecraft.getMinecraft();
         bypackt = new Bypackt(mc);
         logger = event.getModLog();
     }
 
     @EventHandler
-    public void init(FMLInitializationEvent event) {
+    public void init(FMLInitializationEvent event) throws IOException {
         MinecraftForge.EVENT_BUS.register(this);
         logger.info("Hello from: " + bypackt.name);
         bypackt.onLoad();
@@ -38,7 +41,7 @@ public class Main {
     }
 
     @SubscribeEvent
-    public void onRenderWorld(RenderWorldLastEvent event) {
+    public void onRenderWorld(RenderLivingEvent.Post event) {
         bypackt.onRender();
     }
 
