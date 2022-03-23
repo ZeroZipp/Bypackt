@@ -31,8 +31,6 @@ public class Clickgui extends GuiScreen {
     public Clickgui(ArrayList<Module> modulesIn, Bypackt bypacktIn) {
         bypackt = bypacktIn;
         modules = modulesIn;
-        xOff = 38;
-        yOff = 38;
         for(Object[] l : module) {
             list.add(new ArrayList<>());
             names.add((String)l[0]);
@@ -60,6 +58,9 @@ public class Clickgui extends GuiScreen {
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawRect(0, 0, width, height, 0x88000000);
+        int wSize = ((size+5)*module.length-5)/2;
+        xOff = (width/2)-wSize;
+        yOff = height/8;
 
         int c = 0;
         for(String n : names) {
@@ -112,7 +113,7 @@ public class Clickgui extends GuiScreen {
             for(int i = 0; i < active.size(); i++) {
                 if (mouseX > xOff + (i * (size + 5)) && mouseY > yOff + (c * 18) && mouseX < xOff + (i * (size + 5)) + size && mouseY < yOff + (c * 18) + 18) {
                     active.set(i, !active.get(i));
-                    module[i][2] = active.get(i);
+                    module[i][1] = active.get(i);
                     c += 1;
                 }
             }

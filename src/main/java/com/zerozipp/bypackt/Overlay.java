@@ -37,7 +37,7 @@ public class Overlay {
         int c = 0;
         ArrayList<Module> actives = bypackt.modules;
         actives.sort((z, y) -> -(
-                bypackt.font.getStringWidth(z.name) - bypackt.font.getStringWidth(y.name)
+            bypackt.font.getStringWidth(z.name) - bypackt.font.getStringWidth(y.name)
         ));
         if(list) {
             for (Module m : actives) {
