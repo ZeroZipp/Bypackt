@@ -20,12 +20,12 @@ public class Clickgui extends GuiScreen {
     public ArrayList<Boolean> active = new ArrayList<>();
     public ArrayList<String> names = new ArrayList<>();
     public static Object[][] module = {
-            {new ArrayList<Module>(), "Movement", true},
-            {new ArrayList<Module>(), "Auto", true},
-            {new ArrayList<Module>(), "Render", true},
-            {new ArrayList<Module>(), "Combat", true},
-            {new ArrayList<Module>(), "World", true},
-            {new ArrayList<Module>(), "Screen", true}
+            {"Movement", true},
+            {"Auto", true},
+            {"Render", true},
+            {"Combat", true},
+            {"World", true},
+            {"Screen", true}
     };
 
     public Clickgui(ArrayList<Module> modulesIn, Bypackt bypacktIn) {
@@ -34,9 +34,9 @@ public class Clickgui extends GuiScreen {
         xOff = 38;
         yOff = 38;
         for(Object[] l : module) {
-            list.add((ArrayList<Module>)l[0]);
-            names.add((String)l[1]);
-            active.add((Boolean)l[2]);
+            list.add(new ArrayList<>());
+            names.add((String)l[0]);
+            active.add((Boolean)l[1]);
         }
         for(Module m : modules) {
             if(m.id == Module.MOVEMENT) {
