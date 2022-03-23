@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-
 import java.util.ArrayList;
 
 public class Overlay {
@@ -38,7 +37,7 @@ public class Overlay {
         int c = 0;
         ArrayList<Module> actives = bypackt.modules;
         actives.sort((z, y) -> -(
-                bypackt.font.getStringWidth(String.valueOf(z)) - bypackt.font.getStringWidth(String.valueOf(y))
+                bypackt.font.getStringWidth(z.name) - bypackt.font.getStringWidth(y.name)
         ));
         if(list) {
             for (Module m : actives) {

@@ -15,10 +15,11 @@ public class Clickgui extends GuiScreen {
     public Bypackt bypackt;
     public ArrayList<Module> modules;
     public int xOff, yOff;
+
     public ArrayList<ArrayList<Module>> list = new ArrayList<>();
     public ArrayList<Boolean> active = new ArrayList<>();
     public ArrayList<String> names = new ArrayList<>();
-    public Object[][] module = {
+    public static Object[][] module = {
             {new ArrayList<Module>(), "Movement", true},
             {new ArrayList<Module>(), "Auto", true},
             {new ArrayList<Module>(), "Render", true},
@@ -64,6 +65,7 @@ public class Clickgui extends GuiScreen {
         for(String n : names) {
             drawRect(xOff + (c*(size + 5)), yOff, xOff + (c*(size + 5)) + size, yOff + 18, color);
             drawString(bypackt.font, n, xOff + (c*(size + 5)) + 5, yOff + 5, 16777215);
+            drawString(bypackt.font, active.get(c) ? ">" : "<", xOff + (c*(size + 5)) + size-10, yOff + 5, 16777215);
             c += 1;
         }
 
@@ -110,6 +112,7 @@ public class Clickgui extends GuiScreen {
             for(int i = 0; i < active.size(); i++) {
                 if (mouseX > xOff + (i * (size + 5)) && mouseY > yOff + (c * 18) && mouseX < xOff + (i * (size + 5)) + size && mouseY < yOff + (c * 18) + 18) {
                     active.set(i, !active.get(i));
+                    module[i][2] = active.get(i);
                     c += 1;
                 }
             }
