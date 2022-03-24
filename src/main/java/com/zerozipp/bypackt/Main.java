@@ -40,11 +40,6 @@ public class Main {
     }
 
     @SubscribeEvent
-    public void onRenderWorld(TickEvent.PlayerTickEvent event) {
-        bypackt.onEvent(event);
-    }
-
-    @SubscribeEvent
     public void onPreRenderLiving(RenderLivingEvent.Pre event) {
         bypackt.onEvent(event);
     }

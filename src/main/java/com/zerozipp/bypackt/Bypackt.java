@@ -28,7 +28,7 @@ public class Bypackt {
         return this;
     }
 
-    public Bypackt(Minecraft mcIn) throws IOException {
+    public Bypackt(Minecraft mcIn) {
         name = "Bypackt";
         version = "1.3";
         mc = mcIn;
@@ -62,7 +62,7 @@ public class Bypackt {
     }
 
     public void onUpdate() {
-        if(mc.world != null) {
+        if(mc.world != null && mc.player != null) {
             for(Module m : modules) {
                 if(m.active) {
                     m.onUpdate();
@@ -72,7 +72,7 @@ public class Bypackt {
     }
 
     public void onEvent(Event event) {
-        if(mc.world != null) {
+        if(mc.world != null && mc.player != null) {
             for (Module m : modules) {
                 if (m.active) {
                     m.onEvent(event);
@@ -82,7 +82,7 @@ public class Bypackt {
     }
 
     public void onOverlay() {
-        if(mc.world != null) {
+        if(mc.world != null && mc.player != null) {
             overlay.onUpdate();
             onGui();
         }
