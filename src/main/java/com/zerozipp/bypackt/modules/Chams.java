@@ -28,46 +28,48 @@ public class Chams extends Module {
     }
 
     public void onEvent(Event event) {
-        if(event instanceof RenderLivingEvent.Pre) {
-            RenderLivingEvent.Pre livingEvent = (RenderLivingEvent.Pre) event;
-            EntityLivingBase base = livingEvent.getEntity();
-            if(base instanceof EntityPlayer && ((SBoolean) settings[1]).active) {
-                render.enablePolygon();
-                if(((SString) settings[0]).value == 1) {
-                    render.disableLighting();
+        if(event != null) {
+            if (event instanceof RenderLivingEvent.Pre) {
+                RenderLivingEvent.Pre livingEvent = (RenderLivingEvent.Pre) event;
+                EntityLivingBase base = livingEvent.getEntity();
+                if (base instanceof EntityPlayer && ((SBoolean) settings[1]).active) {
+                    render.enablePolygon();
+                    if (((SString) settings[0]).value == 1) {
+                        render.disableLighting();
+                    }
                 }
-            }
-            if(base instanceof EntityAnimal && ((SBoolean) settings[2]).active) {
-                render.enablePolygon();
-                if(((SString) settings[0]).value == 1) {
-                    render.disableLighting();
+                if (base instanceof EntityAnimal && ((SBoolean) settings[2]).active) {
+                    render.enablePolygon();
+                    if (((SString) settings[0]).value == 1) {
+                        render.disableLighting();
+                    }
                 }
-            }
-            if(base instanceof EntityMob && ((SBoolean) settings[3]).active) {
-                render.enablePolygon();
-                if(((SString) settings[0]).value == 1) {
-                    render.disableLighting();
+                if (base instanceof EntityMob && ((SBoolean) settings[3]).active) {
+                    render.enablePolygon();
+                    if (((SString) settings[0]).value == 1) {
+                        render.disableLighting();
+                    }
                 }
-            }
-        }else if(event instanceof RenderLivingEvent.Post) {
-            RenderLivingEvent.Post livingEvent = (RenderLivingEvent.Post) event;
-            EntityLivingBase base = livingEvent.getEntity();
-            if(base instanceof EntityPlayer && ((SBoolean) settings[1]).active) {
-                render.disablePolygon();
-                if(((SString) settings[0]).value == 1) {
-                    render.enableLighting();
+            } else if (event instanceof RenderLivingEvent.Post) {
+                RenderLivingEvent.Post livingEvent = (RenderLivingEvent.Post) event;
+                EntityLivingBase base = livingEvent.getEntity();
+                if (base instanceof EntityPlayer && ((SBoolean) settings[1]).active) {
+                    render.disablePolygon();
+                    if (((SString) settings[0]).value == 1) {
+                        render.enableLighting();
+                    }
                 }
-            }
-            if(base instanceof EntityAnimal && ((SBoolean) settings[2]).active) {
-                render.disablePolygon();
-                if(((SString) settings[0]).value == 1) {
-                    render.enableLighting();
+                if (base instanceof EntityAnimal && ((SBoolean) settings[2]).active) {
+                    render.disablePolygon();
+                    if (((SString) settings[0]).value == 1) {
+                        render.enableLighting();
+                    }
                 }
-            }
-            if(base instanceof EntityMob && ((SBoolean) settings[3]).active) {
-                render.disablePolygon();
-                if(((SString) settings[0]).value == 1) {
-                    render.enableLighting();
+                if (base instanceof EntityMob && ((SBoolean) settings[3]).active) {
+                    render.disablePolygon();
+                    if (((SString) settings[0]).value == 1) {
+                        render.enableLighting();
+                    }
                 }
             }
         }
