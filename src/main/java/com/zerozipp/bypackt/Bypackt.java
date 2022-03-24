@@ -11,6 +11,7 @@ import org.lwjgl.input.Keyboard;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import net.minecraftforge.fml.common.eventhandler.Event;
 
 public class Bypackt {
     private Minecraft mc;
@@ -49,11 +50,11 @@ public class Bypackt {
         modules.add(new Autobreak(mc, "Autobreak", Module.AUTO, false));
         modules.add(new Autosprint(mc, "Autosprint", Module.AUTO, false));
         modules.add(new Autototem(mc, "Autototem", Module.AUTO, false));
-        modules.add(new Fullbright(mc, "Fullbright", Module.RENDER, false));
-        modules.add(new Nobob(mc, "Nobob", Module.RENDER, false));
+        modules.add(new Chams(mc, "Chams", Module.RENDER, false));
         modules.add(new Crystalaura(mc, "Crystalaura", Module.COMBAT, false));
         modules.add(new Killaura(mc, "Killaura", Module.COMBAT, false));
         modules.add(new Scaffold(mc, "Scaffold", Module.WORLD, false));
+        modules.add(new Trigger(mc, "Trigger", Module.COMBAT, false));
         modules.add(new Gui(mc, "Gui", Module.SCREEN, true));
         modules.add(new Hud(mc, "Hud", Module.SCREEN, true));
 
@@ -70,11 +71,11 @@ public class Bypackt {
         }
     }
 
-    public void onRender() {
+    public void onEvent(Event event) {
         if(mc.world != null) {
             for (Module m : modules) {
                 if (m.active) {
-                    m.onRender();
+                    m.onEvent(event);
                 }
             }
         }

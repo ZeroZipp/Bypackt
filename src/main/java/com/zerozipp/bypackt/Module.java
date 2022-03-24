@@ -5,6 +5,7 @@ import com.zerozipp.bypackt.settings.SInteger;
 import com.zerozipp.bypackt.settings.SString;
 import com.zerozipp.bypackt.settings.Setting;
 import net.minecraft.client.Minecraft;
+import net.minecraftforge.fml.common.eventhandler.Event;
 
 public class Module implements Comparable<Module> {
     public static int MOVEMENT = 0;
@@ -62,7 +63,7 @@ public class Module implements Comparable<Module> {
     public void onUpdate() {
     }
 
-    public void onRender() {
+    public void onEvent(Event event) {
     }
 
     public void onDisable() {

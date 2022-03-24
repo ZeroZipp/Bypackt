@@ -9,7 +9,6 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.apache.logging.log4j.Logger;
 
@@ -41,8 +40,18 @@ public class Main {
     }
 
     @SubscribeEvent
-    public void onRenderWorld(RenderLivingEvent.Post event) {
-        bypackt.onRender();
+    public void onRenderWorld(TickEvent.PlayerTickEvent event) {
+        bypackt.onEvent(event);
+    }
+
+    @SubscribeEvent
+    public void onPreRenderLiving(RenderLivingEvent.Pre event) {
+        bypackt.onEvent(event);
+    }
+
+    @SubscribeEvent
+    public void onPostRenderLiving(RenderLivingEvent.Post event) {
+        bypackt.onEvent(event);
     }
 
     @SubscribeEvent
