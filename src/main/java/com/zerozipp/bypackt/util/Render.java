@@ -20,6 +20,10 @@ public class Render {
         GlStateManager.disablePolygonOffset();
     }
 
+    public void setColor(float r, float g, float b, float alpha) {
+        GlStateManager.color(r, g, b, alpha);
+    }
+
     public void enableLighting() {
         GlStateManager.enableLighting();
     }

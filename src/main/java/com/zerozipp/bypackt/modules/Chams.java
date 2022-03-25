@@ -21,6 +21,7 @@ public class Chams extends Module {
         render = new Render();
         settings = new Setting[] {
                 new SString("Mode", 0, new String[] {"Normal", "Light"}),
+                new SString("Color", 0, new String[] {"None", "Red", "Green", "Blue"}),
                 new SBoolean("Players", true),
                 new SBoolean("Entitys", true),
                 new SBoolean("Mobs", true)
@@ -32,40 +33,49 @@ public class Chams extends Module {
             if (event instanceof RenderLivingEvent.Pre) {
                 RenderLivingEvent.Pre livingEvent = (RenderLivingEvent.Pre) event;
                 EntityLivingBase base = livingEvent.getEntity();
-                if (base instanceof EntityPlayer && ((SBoolean) settings[1]).active) {
+                float r = (((SString) settings[1]).value == 1) ? 1.0f : 0.0f;
+                float g = (((SString) settings[1]).value == 2) ? 1.0f : 0.0f;
+                float b = (((SString) settings[1]).value == 3) ? 1.0f : 0.0f;
+                if (base instanceof EntityPlayer && ((SBoolean) settings[2]).active) {
                     render.enablePolygon();
-                    if (((SString) settings[0]).value == 1) {
+                    if(((SString) settings[0]).value == 1) {
                         render.disableLighting();
+                    }else if(((SString) settings[1]).value != 0) {
+                        render.setColor(r, g, b, 1.0f);
                     }
                 }
-                if (base instanceof EntityAnimal && ((SBoolean) settings[2]).active) {
+                if (base instanceof EntityAnimal && ((SBoolean) settings[3]).active) {
                     render.enablePolygon();
-                    if (((SString) settings[0]).value == 1) {
+                    if(((SString) settings[0]).value == 1) {
                         render.disableLighting();
+                    }else if(((SString) settings[1]).value != 0) {
+                        render.setColor(r, g, b, 1.0f);
                     }
                 }
-                if (base instanceof EntityMob && ((SBoolean) settings[3]).active) {
+                if (base instanceof EntityMob && ((SBoolean) settings[4]).active) {
                     render.enablePolygon();
-                    if (((SString) settings[0]).value == 1) {
+                    if(((SString) settings[0]).value == 1) {
                         render.disableLighting();
+                    }else if(((SString) settings[1]).value != 0) {
+                        render.setColor(r, g, b, 1.0f);
                     }
                 }
             } else if (event instanceof RenderLivingEvent.Post) {
                 RenderLivingEvent.Post livingEvent = (RenderLivingEvent.Post) event;
                 EntityLivingBase base = livingEvent.getEntity();
-                if (base instanceof EntityPlayer && ((SBoolean) settings[1]).active) {
+                if (base instanceof EntityPlayer && ((SBoolean) settings[2]).active) {
                     render.disablePolygon();
                     if (((SString) settings[0]).value == 1) {
                         render.enableLighting();
                     }
                 }
-                if (base instanceof EntityAnimal && ((SBoolean) settings[2]).active) {
+                if (base instanceof EntityAnimal && ((SBoolean) settings[3]).active) {
                     render.disablePolygon();
                     if (((SString) settings[0]).value == 1) {
                         render.enableLighting();
                     }
                 }
-                if (base instanceof EntityMob && ((SBoolean) settings[3]).active) {
+                if (base instanceof EntityMob && ((SBoolean) settings[4]).active) {
                     render.disablePolygon();
                     if (((SString) settings[0]).value == 1) {
                         render.enableLighting();

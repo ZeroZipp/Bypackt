@@ -21,6 +21,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class Crystalaura extends Module {
     private boolean hit = false;
@@ -31,7 +33,7 @@ public class Crystalaura extends Module {
         super(mcIn, nameIn, idIn, activeIn);
         timer = new Timer();
         settings = new Setting[] {
-            new SString("Mode", 0, new String[] {"Single", "Multi"}),
+            new SString("Mode", 0, new String[] {"Single", "Multi", "Distance"}),
             new SString("Delay", 2, new String[] {"Off", "Fast", "Normal", "Smooth", "Slow", "Lazy"}),
             new SBoolean("Players", true),
             new SBoolean("Entitys", true),
@@ -46,7 +48,13 @@ public class Crystalaura extends Module {
 
         ArrayList<EntityEnderCrystal> crystals = new ArrayList<EntityEnderCrystal>();
         ArrayList<Entity> others = new ArrayList<Entity>();
-        for(Entity entity : mc.world.loadedEntityList) {
+
+        List<Entity> list = mc.world.loadedEntityList;
+        if(((SString) settings[0]).value == 2) {
+            list.sort(Comparator.comparingDouble((entity -> entity.getDistance(mc.player))));
+        }
+
+        for(Entity entity : list) {
             if(entity instanceof EntityEnderCrystal) {
                 crystals.add((EntityEnderCrystal)entity);
             }else{
@@ -145,7 +153,7 @@ public class Crystalaura extends Module {
             Rotation rot = Rotation.getLook(mc.player, e.getPositionVector().add(new Vec3d(0, 1, 0)));
             mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rot.yaw, rot.pitch, true));
 
-            hit = (((SString) settings[0]).value == 0) ? true : hit;
+            hit = (((SString) settings[0]).value == 0 || ((SString) settings[0]).value == 2) ? true : hit;
             mc.playerController.attackEntity(mc.player, e);
             mc.player.swingArm(EnumHand.MAIN_HAND);
         }

@@ -58,7 +58,9 @@ public class Scaffold extends Module {
                     ItemStack itemstack = mc.player.getHeldItem(enumhand);
                     int i = itemstack.getCount();
 
-                    Rotation rot = Rotation.getLook(mc.player, new Vec3d(neighbor));
+                    Vec3d block = new Vec3d(BlockPos.ORIGIN.offset(side2)).scale(0.5f);
+                    Vec3d center = new Vec3d(new BlockPos(1, 1, 1)).scale(0.5f);
+                    Rotation rot = Rotation.getLook(mc.player, new Vec3d(neighbor).add(center).add(block));
                     mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rot.yaw, rot.pitch, true));
 
                     EnumActionResult enumactionresult = mc.playerController.processRightClickBlock(mc.player, mc.world, neighbor, side2, Vec3d.ZERO, EnumHand.MAIN_HAND);

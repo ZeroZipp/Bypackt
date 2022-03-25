@@ -96,7 +96,7 @@ public class Clickgui extends GuiScreen {
                                 SValue = b.list[b.value];
                             }
                             drawRect(xOff + (i * (size + 5)), yOff + (c * 18), xOff + (i * (size + 5)) + size, yOff + (c * 18) + 18, 0x99111111);
-                            drawString(bypackt.font, setting.name + ": " + SValue, xOff + (i * (size + 5)) + 10, yOff + (c * 18) + 5, 16777215);
+                            drawString(bypackt.font, setting.name + ": " + SValue, xOff + (i * (size + 5)) + 8, yOff + (c * 18) + 5, 16777215);
                             c += 1;
                         }
                     }
