@@ -8,7 +8,6 @@ import net.minecraft.client.resources.SimpleReloadableResourceManager;
 import net.minecraft.client.resources.data.MetadataSerializer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import net.minecraftforge.fml.common.eventhandler.Event;
@@ -17,7 +16,7 @@ public class Bypackt {
     private Minecraft mc;
     public String name;
     public String version;
-    public ArrayList<Module> modules = new ArrayList<Module>();
+    public ArrayList<Module> modules = new ArrayList();
     public FontRenderer font;
     public static ResourceLocation fontLocation;
     private IReloadableResourceManager resourceManager;
@@ -34,7 +33,7 @@ public class Bypackt {
         mc = mcIn;
     }
 
-    public void onLoad() throws IOException {
+    public void onLoad() {
         fontLocation = new ResourceLocation("bypackt", "textures/font/bypackt.png");
         font = new FontRenderer(mc.gameSettings, fontLocation, mc.renderEngine, false);
         this.resourceManager = new SimpleReloadableResourceManager(metadataSerializer);
@@ -62,7 +61,8 @@ public class Bypackt {
 
     public void onUpdate() {
         if(mc.world != null && mc.player != null) {
-            for(Module m : modules) {
+            for (int i = 0; i < modules.size(); i++) {
+                Module m = modules.get(i);
                 if(m.active) {
                     m.onUpdate();
                 }
@@ -72,7 +72,8 @@ public class Bypackt {
 
     public void onEvent(Event event) {
         if(mc.world != null && mc.player != null) {
-            for (Module m : modules) {
+            for (int i = 0; i < modules.size(); i++) {
+                Module m = modules.get(i);
                 if (m.active) {
                     m.onEvent(event);
                 }
@@ -83,7 +84,8 @@ public class Bypackt {
     public void onOverlay() {
         if(mc.world != null && mc.player != null) {
             onGui();
-            for (Module m : modules) {
+            for (int i = 0; i < modules.size(); i++) {
+                Module m = modules.get(i);
                 if (m.active) {
                     m.onOverlay();
                 }
