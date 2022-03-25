@@ -60,7 +60,7 @@ public class Hud extends Module {
         }
 
         int c = 0;
-        ArrayList<Module> actives = bypackt.modules;
+        ArrayList<Module> actives = (ArrayList<Module>) bypackt.modules.clone();
         actives.sort((z, y) -> -(
                 bypackt.font.getStringWidth(z.name) - bypackt.font.getStringWidth(y.name)
         ));
