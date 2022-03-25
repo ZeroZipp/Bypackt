@@ -5,6 +5,7 @@ import com.zerozipp.bypackt.Module;
 import com.zerozipp.bypackt.settings.SBoolean;
 import com.zerozipp.bypackt.settings.SString;
 import com.zerozipp.bypackt.settings.Setting;
+import com.zerozipp.bypackt.util.Timer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.math.BlockPos;
@@ -13,7 +14,9 @@ import java.util.ArrayList;
 
 public class Hud extends Module {
     public Bypackt bypackt;
-    public Object[] colors = {
+    public int rainbow = 0;
+    private Timer timer;
+    public int[] colors = {
             0xf0ff0000,
             0xf0ff8000,
             0xf0ffff00,
@@ -31,19 +34,37 @@ public class Hud extends Module {
     public Hud(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
         super(mcIn, nameIn, idIn, activeIn);
         bypackt = Bypackt.getBypackt();
+        timer = new Timer();
         settings = new Setting[] {
                 new SString("Color", 7, new String[] {
                         "Red", "Orange", "Yellow", "Treuse", "Green", "Spring", "Cyan", "Dodge", "Blue", "Purple", "Violet", "Rose"
                 }),
+                new SBoolean("Rainbow", false),
                 new SBoolean("List", true),
                 new SBoolean("Info", true)
         };
     }
 
+    public int getRainbow(int offsetIn) {
+        int color = rainbow+offsetIn;
+        while(color > colors.length-1) {
+            color -= colors.length-1;
+        }
+        return color;
+    }
+
     public void onOverlay() {
-        int color = (int)colors[((SString)settings[0]).value];
-        boolean list = ((SBoolean)settings[1]).active;
-        boolean info = ((SBoolean)settings[2]).active;
+        if(timer.hasTime(500)) {
+            if (rainbow < colors.length - 1) {
+                rainbow += 1;
+            } else {
+                rainbow = 0;
+            }
+        }
+
+        int color = colors[((SString)settings[0]).value];
+        boolean list = ((SBoolean)settings[2]).active;
+        boolean info = ((SBoolean)settings[3]).active;
 
         ScaledResolution scaled = new ScaledResolution(mc);
         int w = scaled.getScaledWidth();
@@ -68,7 +89,7 @@ public class Hud extends Module {
             for (Module m : actives) {
                 if (m.active) {
                     String text = m.name;
-                    mc.ingameGUI.drawString(bypackt.font, text, w - bypackt.font.getStringWidth(text) - 5, 5 + (c * 10), 16777215);
+                    mc.ingameGUI.drawString(bypackt.font, text, w - bypackt.font.getStringWidth(text) - 5, 5 + (c * 10), ((SBoolean)settings[1]).active ? colors[getRainbow(c)] : 16777215);
                     c += 1;
                 }
             }
