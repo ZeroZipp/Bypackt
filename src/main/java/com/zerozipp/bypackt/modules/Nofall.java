@@ -10,7 +10,8 @@ public class Nofall extends Module {
     public Nofall(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
         super(mcIn, nameIn, idIn, activeIn);
         settings = new Setting[] {
-                new SString("Mode", 0, new String[] {"Normal", "Fixed"})
+            new SString("Mode", 1, new String[] {"Normal", "Fixed"}),
+            new SString("Distance", 0, new String[] {"Half", "Max"})
         };
     }
 
@@ -18,7 +19,7 @@ public class Nofall extends Module {
         if(((SString)settings[0]).value == 0) {
             mc.player.connection.sendPacket(new CPacketPlayer(true));
         }else if(((SString)settings[0]).value == 1) {
-            if(mc.player.fallDistance >= 20) {
+            if(mc.player.fallDistance >= (((SString)settings[0]).value+1)*10) {
                 mc.player.connection.sendPacket(new CPacketPlayer(true));
             }
         }
