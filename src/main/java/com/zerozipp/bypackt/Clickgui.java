@@ -11,7 +11,7 @@ import java.util.Collections;
 
 public class Clickgui extends GuiScreen {
     private static int defColor = 0xf00080ff;
-    private static int color;
+    private static int color = defColor;
     public static int size = 90;
     public Bypackt bypackt;
     public ArrayList<Module> modules;
@@ -38,7 +38,6 @@ public class Clickgui extends GuiScreen {
     }
 
     public Clickgui(ArrayList<Module> modulesIn) {
-        resetColor();
         bypackt = Bypackt.getBypackt();
         modules = modulesIn;
         for(Object[] l : module) {

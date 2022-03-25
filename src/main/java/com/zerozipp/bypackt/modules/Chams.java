@@ -20,8 +20,8 @@ public class Chams extends Module {
         super(mcIn, nameIn, idIn, activeIn);
         render = new Render();
         settings = new Setting[] {
-                new SString("Mode", 0, new String[] {"Normal", "Light"}),
-                new SString("Color", 0, new String[] {"None", "Red", "Green", "Blue"}),
+                new SString("Mode", 0, new String[] {"Normal", "Light", "Color"}),
+                new SString("Color", 0, new String[] {"Red", "Green", "Blue"}),
                 new SBoolean("Players", true),
                 new SBoolean("Entitys", true),
                 new SBoolean("Mobs", true)
@@ -33,14 +33,14 @@ public class Chams extends Module {
             if (event instanceof RenderLivingEvent.Pre) {
                 RenderLivingEvent.Pre livingEvent = (RenderLivingEvent.Pre) event;
                 EntityLivingBase base = livingEvent.getEntity();
-                float r = (((SString) settings[1]).value == 1) ? 1.0f : 0.0f;
-                float g = (((SString) settings[1]).value == 2) ? 1.0f : 0.0f;
-                float b = (((SString) settings[1]).value == 3) ? 1.0f : 0.0f;
+                float r = (((SString) settings[1]).value == 0) ? 1.0f : 0.0f;
+                float g = (((SString) settings[1]).value == 1) ? 1.0f : 0.0f;
+                float b = (((SString) settings[1]).value == 2) ? 1.0f : 0.0f;
                 if (base instanceof EntityPlayer && ((SBoolean) settings[2]).active) {
                     render.enablePolygon();
                     if(((SString) settings[0]).value == 1) {
                         render.disableLighting();
-                    }else if(((SString) settings[1]).value != 0) {
+                    }else if(((SString) settings[0]).value == 2) {
                         render.setColor(r, g, b, 1.0f);
                     }
                 }
@@ -48,7 +48,7 @@ public class Chams extends Module {
                     render.enablePolygon();
                     if(((SString) settings[0]).value == 1) {
                         render.disableLighting();
-                    }else if(((SString) settings[1]).value != 0) {
+                    }else if(((SString) settings[0]).value == 2) {
                         render.setColor(r, g, b, 1.0f);
                     }
                 }
@@ -56,7 +56,7 @@ public class Chams extends Module {
                     render.enablePolygon();
                     if(((SString) settings[0]).value == 1) {
                         render.disableLighting();
-                    }else if(((SString) settings[1]).value != 0) {
+                    }else if(((SString) settings[0]).value == 2) {
                         render.setColor(r, g, b, 1.0f);
                     }
                 }
