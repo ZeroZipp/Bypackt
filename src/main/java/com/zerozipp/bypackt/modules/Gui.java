@@ -2,7 +2,6 @@ package com.zerozipp.bypackt.modules;
 
 import com.zerozipp.bypackt.Clickgui;
 import com.zerozipp.bypackt.Module;
-import com.zerozipp.bypackt.settings.SBoolean;
 import com.zerozipp.bypackt.settings.SString;
 import com.zerozipp.bypackt.settings.Setting;
 import net.minecraft.client.Minecraft;
@@ -33,14 +32,14 @@ public class Gui extends Module {
     }
 
     public void onEnable() {
-        Clickgui.color = (int)colors[((SString)settings[0]).value];
+        Clickgui.setColor((int)colors[((SString)settings[0]).value]);
     }
 
     public void onUpdate() {
-        Clickgui.color = (int)colors[((SString)settings[0]).value];
+        Clickgui.setColor((int)colors[((SString)settings[0]).value]);
     }
 
     public void onDisable() {
-        Clickgui.color = 0xf00080ff;
+        Clickgui.resetColor();
     }
 }

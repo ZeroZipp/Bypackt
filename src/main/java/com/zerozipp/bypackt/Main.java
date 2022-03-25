@@ -23,7 +23,7 @@ public class Main {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) throws IOException {
         mc = Minecraft.getMinecraft();
-        bypackt = new Bypackt(mc);
+        bypackt = Bypackt.getBypackt();
         logger = event.getModLog();
     }
 

@@ -18,21 +18,20 @@ public class Bypackt {
     public String name;
     public String version;
     public ArrayList<Module> modules = new ArrayList<Module>();
-    public Overlay overlay;
     public FontRenderer font;
     public static ResourceLocation fontLocation;
     private IReloadableResourceManager resourceManager;
     private final MetadataSerializer metadataSerializer = new MetadataSerializer();
+    private static Bypackt bypackt = new Bypackt(Minecraft.getMinecraft());
 
-    public Bypackt getBypackt() {
-        return this;
+    public static Bypackt getBypackt() {
+        return bypackt;
     }
 
     public Bypackt(Minecraft mcIn) {
         name = "Bypackt";
         version = "1.3";
         mc = mcIn;
-        overlay = new Overlay(mc, getBypackt());
     }
 
     public void onLoad() throws IOException {
@@ -83,15 +82,19 @@ public class Bypackt {
 
     public void onOverlay() {
         if(mc.world != null && mc.player != null) {
-            overlay.onUpdate();
             onGui();
+            for (Module m : modules) {
+                if (m.active) {
+                    m.onOverlay();
+                }
+            }
         }
     }
 
     public void onGui() {
         if(Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
             if(mc.currentScreen == null) {
-                mc.displayGuiScreen(new Clickgui(modules, getBypackt()));
+                mc.displayGuiScreen(new Clickgui(modules));
             }
         }
     }

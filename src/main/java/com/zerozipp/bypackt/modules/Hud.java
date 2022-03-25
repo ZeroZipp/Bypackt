@@ -1,13 +1,19 @@
 package com.zerozipp.bypackt.modules;
 
+import com.zerozipp.bypackt.Bypackt;
 import com.zerozipp.bypackt.Module;
-import com.zerozipp.bypackt.Overlay;
 import com.zerozipp.bypackt.settings.SBoolean;
 import com.zerozipp.bypackt.settings.SString;
 import com.zerozipp.bypackt.settings.Setting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+
+import java.util.ArrayList;
 
 public class Hud extends Module {
+    public Bypackt bypackt;
     public Object[] colors = {
             0xf0ff0000,
             0xf0ff8000,
@@ -25,6 +31,7 @@ public class Hud extends Module {
 
     public Hud(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
         super(mcIn, nameIn, idIn, activeIn);
+        bypackt = Bypackt.getBypackt();
         settings = new Setting[] {
                 new SString("Color", 7, new String[] {
                         "Red", "Orange", "Yellow", "Treuse", "Green", "Spring", "Cyan", "Dodge", "Blue", "Purple", "Violet", "Rose"
@@ -34,21 +41,38 @@ public class Hud extends Module {
         };
     }
 
-    public void onEnable() {
-        Overlay.color = (int)colors[((SString)settings[0]).value];
-        Overlay.list = ((SBoolean)settings[1]).active;
-        Overlay.info = ((SBoolean)settings[2]).active;
-    }
+    public void onOverlay() {
+        int color = (int)colors[((SString)settings[0]).value];
+        boolean list = ((SBoolean)settings[1]).active;
+        boolean info = ((SBoolean)settings[2]).active;
 
-    public void onUpdate() {
-        Overlay.color = (int)colors[((SString)settings[0]).value];
-        Overlay.list = ((SBoolean)settings[1]).active;
-        Overlay.info = ((SBoolean)settings[2]).active;
-    }
+        ScaledResolution scaled = new ScaledResolution(mc);
+        int w = scaled.getScaledWidth();
 
-    public void onDisable() {
-        Overlay.color = 0xf00080ff;
-        Overlay.list = true;
-        Overlay.info = true;
+        int fps = Minecraft.getDebugFPS();
+        Vec3d pvec = mc.player.getPositionVector();
+        BlockPos pos = new BlockPos(pvec);
+
+        if(info) {
+            mc.ingameGUI.drawString(bypackt.font, bypackt.name, 5, 5, color);
+            mc.ingameGUI.drawString(bypackt.font, bypackt.version, bypackt.font.getStringWidth(bypackt.name) + 8, 5, 16777215);
+            mc.ingameGUI.drawString(bypackt.font, "X: " + pos.getX() + " Y: " + pos.getY() + " Z: " + pos.getZ(), 5, 15, 16777215);
+            mc.ingameGUI.drawString(bypackt.font, "Fps: " + fps, 5, 25, 16777215);
+        }
+
+        int c = 0;
+        ArrayList<Module> actives = bypackt.modules;
+        actives.sort((z, y) -> -(
+                bypackt.font.getStringWidth(z.name) - bypackt.font.getStringWidth(y.name)
+        ));
+        if(list) {
+            for (Module m : actives) {
+                if (m.active) {
+                    String text = m.name;
+                    mc.ingameGUI.drawString(bypackt.font, text, w - bypackt.font.getStringWidth(text) - 5, 5 + (c * 10), 16777215);
+                    c += 1;
+                }
+            }
+        }
     }
 }

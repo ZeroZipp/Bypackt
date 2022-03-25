@@ -63,6 +63,9 @@ public class Module implements Comparable<Module> {
     public void onUpdate() {
     }
 
+    public void onOverlay() {
+    }
+
     public void onEvent(Event event) {
     }
 

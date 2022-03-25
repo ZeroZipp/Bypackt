@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Clickgui extends GuiScreen {
-    public static int color = 0xf00080ff;
+    private static int defColor = 0xf00080ff;
+    private static int color;
     public static int size = 90;
     public Bypackt bypackt;
     public ArrayList<Module> modules;
@@ -28,8 +29,17 @@ public class Clickgui extends GuiScreen {
             {"Screen", true}
     };
 
-    public Clickgui(ArrayList<Module> modulesIn, Bypackt bypacktIn) {
-        bypackt = bypacktIn;
+    public static void setColor(int colorIn) {
+        color = colorIn;
+    }
+
+    public static void resetColor() {
+        color = defColor;
+    }
+
+    public Clickgui(ArrayList<Module> modulesIn) {
+        resetColor();
+        bypackt = Bypackt.getBypackt();
         modules = modulesIn;
         for(Object[] l : module) {
             list.add(new ArrayList<>());
