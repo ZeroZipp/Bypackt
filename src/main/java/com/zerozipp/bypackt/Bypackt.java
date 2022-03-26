@@ -55,6 +55,7 @@ public class Bypackt {
         modules.add(new Trigger(mc, "Trigger", Module.COMBAT, false));
         modules.add(new Gui(mc, "Gui", Module.SCREEN, true));
         modules.add(new Hud(mc, "Hud", Module.SCREEN, true));
+        modules.add(new Tabgui(mc, "Tabgui", Module.SCREEN, false));
 
         Collections.sort(modules);
     }
