@@ -11,7 +11,7 @@ public class Nofall extends Module {
         super(mcIn, nameIn, idIn, activeIn);
         settings = new Setting[] {
             new SString("Mode", 1, new String[] {"Normal", "Fixed"}),
-            new SString("Distance", 0, new String[] {"None", "Max"})
+            new SString("Distance", 0, new String[] {"Min", "Max"})
         };
     }
 
@@ -19,7 +19,7 @@ public class Nofall extends Module {
         if(((SString)settings[0]).value == 0) {
             mc.player.connection.sendPacket(new CPacketPlayer(true));
         }else if(((SString)settings[0]).value == 1) {
-            if(mc.player.fallDistance >= (((SString)settings[1]).value)*10) {
+            if(mc.player.fallDistance < (((SString)settings[1]).value+1)*10) {
                 mc.player.connection.sendPacket(new CPacketPlayer(true));
             }
         }
