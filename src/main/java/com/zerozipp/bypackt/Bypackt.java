@@ -48,6 +48,7 @@ public class Bypackt {
         modules.add(new Autobreak(mc, "Autobreak", Module.AUTO, false));
         modules.add(new Autosprint(mc, "Autosprint", Module.AUTO, false));
         modules.add(new Autototem(mc, "Autototem", Module.AUTO, false));
+        modules.add(new Autoaim(mc, "Autoaim", Module.AUTO, false));
         modules.add(new Chams(mc, "Chams", Module.RENDER, false));
         modules.add(new Crystalaura(mc, "Crystalaura", Module.COMBAT, false));
         modules.add(new Killaura(mc, "Killaura", Module.COMBAT, false));

@@ -2,6 +2,7 @@ package com.zerozipp.bypackt.modules;
 
 import com.zerozipp.bypackt.Module;
 import com.zerozipp.bypackt.settings.SBoolean;
+import com.zerozipp.bypackt.settings.SInteger;
 import com.zerozipp.bypackt.settings.SString;
 import com.zerozipp.bypackt.settings.Setting;
 import com.zerozipp.bypackt.util.Rotation;
@@ -29,6 +30,7 @@ public class Killaura extends Module {
         settings = new Setting[] {
             new SString("Mode", 0, new String[] {"Single", "Multi", "Distance"}),
             new SString("Delay", 2, new String[] {"Off", "Fast", "Normal", "Smooth", "Slow", "Lazy"}),
+            new SInteger("Reach", 4, 1, 8),
             new SBoolean("Players", true),
             new SBoolean("Entitys", true),
             new SBoolean("Mobs", true)
@@ -45,14 +47,14 @@ public class Killaura extends Module {
         if(timer.hasTime(((SString)settings[1]).value*250)) {
             for(Entity e : mc.world.loadedEntityList) {
                 if(!hit && e != mc.player) {
-                    if(mc.player.getDistance(e) < 4) {
-                        if(e instanceof EntityPlayer && ((SBoolean) settings[2]).active) {
+                    if(mc.player.getDistance(e) < ((SInteger) settings[2]).value) {
+                        if(e instanceof EntityPlayer && ((SBoolean) settings[3]).active) {
                             attack(e);
                         }
-                        if(e instanceof EntityAnimal && ((SBoolean) settings[3]).active) {
+                        if(e instanceof EntityAnimal && ((SBoolean) settings[4]).active) {
                             attack(e);
                         }
-                        if(e instanceof EntityMob && ((SBoolean) settings[4]).active) {
+                        if(e instanceof EntityMob && ((SBoolean) settings[5]).active) {
                             attack(e);
                         }
                     }

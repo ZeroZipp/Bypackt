@@ -2,6 +2,7 @@ package com.zerozipp.bypackt.modules;
 
 import com.zerozipp.bypackt.Module;
 import com.zerozipp.bypackt.settings.SBoolean;
+import com.zerozipp.bypackt.settings.SInteger;
 import com.zerozipp.bypackt.settings.SString;
 import com.zerozipp.bypackt.settings.Setting;
 import com.zerozipp.bypackt.util.Timer;
@@ -19,10 +20,11 @@ public class Trigger extends Module {
         super(mcIn, nameIn, idIn, activeIn);
         timer = new Timer();
         settings = new Setting[] {
-                new SString("Delay", 2, new String[] {"Off", "Fast", "Normal", "Smooth", "Slow", "Lazy"}),
-                new SBoolean("Players", true),
-                new SBoolean("Entitys", true),
-                new SBoolean("Mobs", true)
+            new SString("Delay", 2, new String[] {"Off", "Fast", "Normal", "Smooth", "Slow", "Lazy"}),
+            new SInteger("Reach", 4, 1, 8),
+            new SBoolean("Players", true),
+            new SBoolean("Entitys", true),
+            new SBoolean("Mobs", true)
         };
     }
 
@@ -30,14 +32,14 @@ public class Trigger extends Module {
         Entity e = mc.objectMouseOver.entityHit;
         if(timer.hasTime(((SString)settings[0]).value*250)) {
             if (e != null && e != mc.player) {
-                if (mc.player.getDistance(e) < 4) {
-                    if (e instanceof EntityPlayer && ((SBoolean) settings[1]).active) {
+                if (mc.player.getDistance(e) < ((SInteger) settings[1]).value) {
+                    if (e instanceof EntityPlayer && ((SBoolean) settings[2]).active) {
                         attack(e);
                     }
-                    if (e instanceof EntityAnimal && ((SBoolean) settings[2]).active) {
+                    if (e instanceof EntityAnimal && ((SBoolean) settings[3]).active) {
                         attack(e);
                     }
-                    if (e instanceof EntityMob && ((SBoolean) settings[3]).active) {
+                    if (e instanceof EntityMob && ((SBoolean) settings[4]).active) {
                         attack(e);
                     }
                 }
