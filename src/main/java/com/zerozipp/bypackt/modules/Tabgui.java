@@ -84,52 +84,54 @@ public class Tabgui extends Module {
 
     public void onUpdate() {
         select[1] = tab ? select[1] : 0;
-        if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-            if(!pressed) {
-                pressed = true;
-                if(!tab) {
-                    if(select[0] < module.length - 1) {
-                        select[0] += 1;
-                    }
-                }else{
-                    if(select[1] < list.get(select[0]).size() - 1) {
-                        select[1] += 1;
-                    }
-                }
-            }
-        }else if(Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-            if(!pressed) {
-                pressed = true;
-                if(!tab) {
-                    if(select[0] > 0) {
-                        select[0] -= 1;
-                    }
-                }else{
-                    if(select[1] > 0) {
-                        select[1] -= 1;
+        if(mc.currentScreen == null) {
+            if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+                if (!pressed) {
+                    pressed = true;
+                    if (!tab) {
+                        if (select[0] < module.length - 1) {
+                            select[0] += 1;
+                        }
+                    } else {
+                        if (select[1] < list.get(select[0]).size() - 1) {
+                            select[1] += 1;
+                        }
                     }
                 }
-            }
-        }else if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
-            if(!pressed) {
-                pressed = true;
-                tab = false;
-            }
-        }else if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-            if(!pressed) {
-                pressed = true;
-                tab = true;
-            }
-        }else if(Keyboard.isKeyDown(Keyboard.KEY_RETURN) || Keyboard.isKeyDown(Keyboard.KEY_NUMPADENTER)) {
-            if(!pressed) {
-                pressed = true;
-                if(tab) {
-                    ArrayList<Module> mod = list.get(select[0]);
-                    mod.get(select[1]).setActive(!mod.get(select[1]).active);
+            } else if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+                if (!pressed) {
+                    pressed = true;
+                    if (!tab) {
+                        if (select[0] > 0) {
+                            select[0] -= 1;
+                        }
+                    } else {
+                        if (select[1] > 0) {
+                            select[1] -= 1;
+                        }
+                    }
                 }
+            } else if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+                if (!pressed) {
+                    pressed = true;
+                    tab = false;
+                }
+            } else if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+                if (!pressed) {
+                    pressed = true;
+                    tab = true;
+                }
+            } else if (Keyboard.isKeyDown(Keyboard.KEY_RETURN) || Keyboard.isKeyDown(Keyboard.KEY_NUMPADENTER)) {
+                if (!pressed) {
+                    pressed = true;
+                    if (tab) {
+                        ArrayList<Module> mod = list.get(select[0]);
+                        mod.get(select[1]).setActive(!mod.get(select[1]).active);
+                    }
+                }
+            } else {
+                pressed = false;
             }
-        }else{
-            pressed = false;
         }
     }
 
