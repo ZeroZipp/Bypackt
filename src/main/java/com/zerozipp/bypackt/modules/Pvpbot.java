@@ -57,29 +57,33 @@ public class Pvpbot extends Module {
         Entity hit = null;
         for(Entity target : mc.world.loadedEntityList) {
             if(!done && target != mc.player) {
-                if(target instanceof EntityPlayer && ((SBoolean) settings[5]).active) {
-                    hit = target;
-                    done = true;
-                }
-                if(target instanceof EntityAnimal && ((SBoolean) settings[6]).active) {
-                    hit = target;
-                    done = true;
-                }
-                if(target instanceof EntityMob && ((SBoolean) settings[7]).active) {
-                    hit = target;
-                    done = true;
+                if(!e.isDead && target.isEntityAlive()) {
+                    if (target instanceof EntityPlayer && ((SBoolean) settings[5]).active) {
+                        hit = target;
+                        done = true;
+                    }
+                    if (target instanceof EntityAnimal && ((SBoolean) settings[6]).active) {
+                        hit = target;
+                        done = true;
+                    }
+                    if (target instanceof EntityMob && ((SBoolean) settings[7]).active) {
+                        hit = target;
+                        done = true;
+                    }
                 }
             }
         }
         if(hit != null) {
-            keys.setPressed(mc.gameSettings.keyBindForward, true);
-            if(mc.player.isInWater()) {
-                if(((SBoolean) settings[4]).active) {
-                    keys.setPressed(mc.gameSettings.keyBindJump, true);
-                }
-            }else if(mc.player.onGround && ((SBoolean) settings[3]).active) {
-                if(!mc.player.isInWater() && !mc.player.isInLava() && !mc.player.isOnLadder()) {
-                    mc.player.jump();
+            if(mc.currentScreen != null) {
+                keys.setPressed(mc.gameSettings.keyBindForward, true);
+                if (mc.player.isInWater()) {
+                    if (((SBoolean) settings[4]).active) {
+                        keys.setPressed(mc.gameSettings.keyBindJump, true);
+                    }
+                } else if (mc.player.onGround && ((SBoolean) settings[3]).active) {
+                    if (!mc.player.isInWater() && !mc.player.isInLava() && !mc.player.isOnLadder()) {
+                        mc.player.jump();
+                    }
                 }
             }
             rotate(hit);
