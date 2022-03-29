@@ -57,7 +57,7 @@ public class Pvpbot extends Module {
         Entity hit = null;
         for(Entity target : mc.world.loadedEntityList) {
             if(!done && target != mc.player) {
-                if(!e.isDead && target.isEntityAlive()) {
+                if(!target.isDead && target.isEntityAlive()) {
                     if (target instanceof EntityPlayer && ((SBoolean) settings[5]).active) {
                         hit = target;
                         done = true;
@@ -74,7 +74,7 @@ public class Pvpbot extends Module {
             }
         }
         if(hit != null) {
-            if(mc.currentScreen != null) {
+            if(mc.currentScreen == null) {
                 keys.setPressed(mc.gameSettings.keyBindForward, true);
                 if (mc.player.isInWater()) {
                     if (((SBoolean) settings[4]).active) {
