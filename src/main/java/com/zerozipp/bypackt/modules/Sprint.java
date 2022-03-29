@@ -5,11 +5,11 @@ import com.zerozipp.bypackt.settings.SString;
 import com.zerozipp.bypackt.settings.Setting;
 import net.minecraft.client.Minecraft;
 
-public class Autosprint extends Module {
-    public Autosprint(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
+public class Sprint extends Module {
+    public Sprint(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
         super(mcIn, nameIn, idIn, activeIn);
         settings = new Setting[] {
-                new SString("Mode", 0, new String[] {"Normal", "All"})
+            new SString("Mode", 0, new String[] {"Normal", "All"})
         };
     }
 

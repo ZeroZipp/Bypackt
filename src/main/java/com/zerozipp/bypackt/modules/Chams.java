@@ -20,11 +20,11 @@ public class Chams extends Module {
         super(mcIn, nameIn, idIn, activeIn);
         render = new Render();
         settings = new Setting[] {
-                new SString("Mode", 0, new String[] {"Normal", "Light", "Color"}),
-                new SString("Color", 0, new String[] {"Red", "Green", "Blue"}),
-                new SBoolean("Players", true),
-                new SBoolean("Entitys", true),
-                new SBoolean("Mobs", true)
+            new SString("Mode", 0, new String[] {"Normal", "Light", "Color"}),
+            new SString("Color", 0, new String[] {"Red", "Green", "Blue"}),
+            new SBoolean("Players", true),
+            new SBoolean("Entitys", true),
+            new SBoolean("Mobs", true)
         };
     }
 

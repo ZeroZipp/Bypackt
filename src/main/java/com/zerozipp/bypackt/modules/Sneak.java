@@ -6,10 +6,10 @@ import com.zerozipp.bypackt.settings.Setting;
 import com.zerozipp.bypackt.util.Keys;
 import net.minecraft.client.Minecraft;
 
-public class Autosneak extends Module {
+public class Sneak extends Module {
     private Keys keys;
 
-    public Autosneak(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
+    public Sneak(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
         super(mcIn, nameIn, idIn, activeIn);
         keys = new Keys();
         settings = new Setting[] {
