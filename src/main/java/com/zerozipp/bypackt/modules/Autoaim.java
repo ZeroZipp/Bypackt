@@ -6,18 +6,12 @@ import com.zerozipp.bypackt.settings.SInteger;
 import com.zerozipp.bypackt.settings.SString;
 import com.zerozipp.bypackt.settings.Setting;
 import com.zerozipp.bypackt.util.Rotation;
-import com.zerozipp.bypackt.util.Timer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.play.client.CPacketPlayer;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.Vec3d;
-
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -41,7 +35,6 @@ public class Autoaim extends Module {
 
         if(((SString) settings[0]).value == 1) {
             list.sort(Comparator.comparingDouble((entity -> entity.getDistance(mc.player))));
-
         }
         for(Entity e : mc.world.loadedEntityList) {
             if(!done && e != mc.player) {

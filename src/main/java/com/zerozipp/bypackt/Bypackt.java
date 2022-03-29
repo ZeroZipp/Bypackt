@@ -7,6 +7,7 @@ import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.resources.SimpleReloadableResourceManager;
 import net.minecraft.client.resources.data.MetadataSerializer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.asm.transformers.deobf.FMLDeobfuscatingRemapper;
 import org.lwjgl.input.Keyboard;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,6 +34,12 @@ public class Bypackt {
         mc = mcIn;
     }
 
+    public boolean isObfuscated() {
+        String mcClassName = Minecraft.class.getName().replace(".", "/");
+        FMLDeobfuscatingRemapper remapper = FMLDeobfuscatingRemapper.INSTANCE;
+        return !mcClassName.equals(remapper.unmap(mcClassName));
+    }
+
     public void onLoad() {
         fontLocation = new ResourceLocation("bypackt", "textures/font/bypackt.png");
         font = new FontRenderer(mc.gameSettings, fontLocation, mc.renderEngine, false);
@@ -49,6 +56,9 @@ public class Bypackt {
         modules.add(new Autosprint(mc, "Autosprint", Module.AUTO, false));
         modules.add(new Autototem(mc, "Autototem", Module.AUTO, false));
         modules.add(new Autoaim(mc, "Autoaim", Module.AUTO, false));
+        modules.add(new Autopvp(mc, "Autopvp", Module.AUTO, false));
+        modules.add(new Autowalk(mc, "Autowalk", Module.AUTO, false));
+        modules.add(new Autosneak(mc, "Autosneak", Module.AUTO, false));
         modules.add(new Chams(mc, "Chams", Module.RENDER, false));
         modules.add(new Crystalaura(mc, "Crystalaura", Module.COMBAT, false));
         modules.add(new Killaura(mc, "Killaura", Module.COMBAT, false));

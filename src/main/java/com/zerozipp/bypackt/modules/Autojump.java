@@ -10,7 +10,9 @@ public class Autojump extends Module {
 
     public void onUpdate() {
         if(mc.player.onGround) {
-            mc.player.jump();
+            if(!mc.player.isInWater() && !mc.player.isInLava() && !mc.player.isOnLadder()) {
+                mc.player.jump();
+            }
         }
     }
 }
