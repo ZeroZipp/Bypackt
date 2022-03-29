@@ -1,15 +1,10 @@
 package com.zerozipp.bypackt.modules;
 
 import com.zerozipp.bypackt.Bypackt;
-import com.zerozipp.bypackt.Clickgui;
 import com.zerozipp.bypackt.Module;
-import com.zerozipp.bypackt.settings.SBoolean;
 import com.zerozipp.bypackt.settings.SString;
 import com.zerozipp.bypackt.settings.Setting;
-import com.zerozipp.bypackt.util.Timer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
@@ -51,9 +46,9 @@ public class Tabgui extends Module {
         super(mcIn, nameIn, idIn, activeIn);
         bypackt = Bypackt.getBypackt();
         settings = new Setting[] {
-                new SString("Color", 7, new String[] {
-                        "Red", "Orange", "Yellow", "Treuse", "Green", "Spring", "Cyan", "Dodge", "Blue", "Purple", "Violet", "Rose"
-                })
+            new SString("Color", 7, new String[] {
+                "Red", "Orange", "Yellow", "Treuse", "Green", "Spring", "Cyan", "Dodge", "Blue", "Purple", "Violet", "Rose"
+            })
         };
         xOff = 8;
         yOff = 50;
