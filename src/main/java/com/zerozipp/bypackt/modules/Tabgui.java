@@ -51,7 +51,7 @@ public class Tabgui extends Module {
             })
         };
         xOff = 8;
-        yOff = 50;
+        yOff = 60;
         ArrayList<Module> modules = bypackt.modules;
         for(Object[] l : module) {
             list.add(new ArrayList<>());

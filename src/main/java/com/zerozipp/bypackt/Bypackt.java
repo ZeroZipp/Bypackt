@@ -17,6 +17,7 @@ public class Bypackt {
     private Minecraft mc;
     public String name;
     public String version;
+    public String type;
     public ArrayList<Module> modules = new ArrayList();
     public FontRenderer font;
     public static ResourceLocation fontLocation;
@@ -31,6 +32,7 @@ public class Bypackt {
     public Bypackt(Minecraft mcIn) {
         name = "Bypackt";
         version = "1.3";
+        type = "stable";
         mc = mcIn;
     }
 
@@ -41,7 +43,8 @@ public class Bypackt {
     }
 
     public void onLoad() {
-        fontLocation = new ResourceLocation("bypackt", "textures/font/bypackt.png");
+        //fontLocation = new ResourceLocation("bypackt", "textures/font/bypackt.png");
+        fontLocation = new ResourceLocation("textures/font/ascii.png");
         font = new FontRenderer(mc.gameSettings, fontLocation, mc.renderEngine, false);
         this.resourceManager = new SimpleReloadableResourceManager(metadataSerializer);
         resourceManager.registerReloadListener(font);

@@ -74,10 +74,15 @@ public class Hud extends Module {
         BlockPos pos = new BlockPos(pvec);
 
         if(info) {
-            mc.ingameGUI.drawString(bypackt.font, bypackt.name, 5, 5, color);
-            mc.ingameGUI.drawString(bypackt.font, bypackt.version, bypackt.font.getStringWidth(bypackt.name) + 8, 5, 16777215);
-            mc.ingameGUI.drawString(bypackt.font, "X: " + pos.getX() + " Y: " + pos.getY() + " Z: " + pos.getZ(), 5, 15, 16777215);
-            mc.ingameGUI.drawString(bypackt.font, "Fps: " + fps, 5, 25, 16777215);
+            String text = bypackt.version + " : " + bypackt.type;
+            int width = bypackt.font.getStringWidth(bypackt.name) + 2 + bypackt.font.getStringWidth(text);
+            mc.ingameGUI.drawRect(3, 3, width + 11, 3 + 16, 0x99000000);
+            mc.ingameGUI.drawRect(3, 3 + 16, width + 11, 3 + 16 + 2, ((SBoolean)settings[1]).active ? colors[getRainbow(0)] : color);
+            mc.ingameGUI.drawString(bypackt.font, bypackt.name, 7, 7, color);
+            mc.ingameGUI.drawString(bypackt.font, text, bypackt.font.getStringWidth(bypackt.name) + 9, 7, 16777215);
+
+            mc.ingameGUI.drawString(bypackt.font, "X: " + pos.getX() + " Y: " + pos.getY() + " Z: " + pos.getZ(), 5, 24, 16777215);
+            mc.ingameGUI.drawString(bypackt.font, "Fps: " + fps, 5, 34, 16777215);
         }
 
         int c = 0;
@@ -89,7 +94,9 @@ public class Hud extends Module {
             for (Module m : actives) {
                 if (m.active) {
                     String text = m.name;
-                    mc.ingameGUI.drawString(bypackt.font, text, w - bypackt.font.getStringWidth(text) - 5, 5 + (c * 10), ((SBoolean)settings[1]).active ? colors[getRainbow(c)] : 16777215);
+                    mc.ingameGUI.drawRect(w - 3, 3 + (c * 16), w - bypackt.font.getStringWidth(text) - 11, 3 + (c * 16) + 16, 0x99000000);
+                    mc.ingameGUI.drawRect(w - bypackt.font.getStringWidth(text) - 13, 3 + (c * 16), w - bypackt.font.getStringWidth(text) - 11, 3 + (c * 16) + 16, ((SBoolean)settings[1]).active ? colors[getRainbow(c)] : color);
+                    mc.ingameGUI.drawString(bypackt.font, text, w - bypackt.font.getStringWidth(text) - 7, 7 + (c * 16), 16777215);
                     c += 1;
                 }
             }
