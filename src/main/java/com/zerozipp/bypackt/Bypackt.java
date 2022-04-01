@@ -1,6 +1,7 @@
 package com.zerozipp.bypackt;
 
 import com.zerozipp.bypackt.modules.*;
+import com.zerozipp.bypackt.util.Version;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.IReloadableResourceManager;
@@ -16,14 +17,17 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 public class Bypackt {
     private Minecraft mc;
     public String name;
-    public String version;
-    public String type;
     public ArrayList<Module> modules = new ArrayList();
     public FontRenderer font;
     public static ResourceLocation fontLocation;
     private IReloadableResourceManager resourceManager;
     private final MetadataSerializer metadataSerializer = new MetadataSerializer();
     private static Bypackt bypackt = new Bypackt(Minecraft.getMinecraft());
+    private static Version version = new Version(1, 4, 0, Version.NIGHTLY);
+
+    public static Version getVersion() {
+        return version;
+    }
 
     public static Bypackt getBypackt() {
         return bypackt;
@@ -31,8 +35,6 @@ public class Bypackt {
 
     public Bypackt(Minecraft mcIn) {
         name = "Bypackt";
-        version = "1.3";
-        type = "stable";
         mc = mcIn;
     }
 

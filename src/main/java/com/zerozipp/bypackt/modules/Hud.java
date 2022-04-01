@@ -6,6 +6,7 @@ import com.zerozipp.bypackt.settings.SBoolean;
 import com.zerozipp.bypackt.settings.SString;
 import com.zerozipp.bypackt.settings.Setting;
 import com.zerozipp.bypackt.util.Timer;
+import com.zerozipp.bypackt.util.Version;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.math.BlockPos;
@@ -74,7 +75,8 @@ public class Hud extends Module {
         BlockPos pos = new BlockPos(pvec);
 
         if(info) {
-            String text = bypackt.version + " : " + bypackt.type;
+            Version version = bypackt.getVersion();
+            String text = version.getVersion() + " : " + (version.isStable() ? "stable" : "nightly");
             int width = bypackt.font.getStringWidth(bypackt.name) + 2 + bypackt.font.getStringWidth(text);
             mc.ingameGUI.drawRect(3, 3, width + 11, 3 + 16, 0x99000000);
             mc.ingameGUI.drawRect(3, 3 + 16, width + 11, 3 + 16 + 2, ((SBoolean)settings[1]).active ? colors[getRainbow(0)] : color);
