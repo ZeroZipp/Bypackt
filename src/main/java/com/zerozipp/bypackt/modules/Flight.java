@@ -1,14 +1,18 @@
 package com.zerozipp.bypackt.modules;
 
 import com.zerozipp.bypackt.Module;
+import com.zerozipp.bypackt.settings.*;
+import com.zerozipp.bypackt.settings.Setting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.play.client.CPacketPlayer;
 
 public class Flight extends Module {
-    public float speed = 0.3f;
-
     public Flight(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
         super(mcIn, nameIn, idIn, activeIn);
+        settings = new Setting[] {
+                new SString("Speed", 1, new String[] {"Slow", "Normal", "Fast"}),
+                new SBoolean("Nodamage", true)
+        };
     }
 
     public void onUpdate() {
@@ -16,7 +20,7 @@ public class Flight extends Module {
         mc.player.motionY = 0.0f;
         mc.player.motionZ = 0.0f;
 
-        float walk = speed;
+        float walk = (((SString)settings[0]).value+1)*0.15f;
         if (mc.player.isSprinting()) {
             walk *= 1.5f;
         }
@@ -45,8 +49,13 @@ public class Flight extends Module {
         }
 
         float yaw = mc.player.rotationYaw;
-        mc.player.motionX = (forward * Math.cos(Math.toRadians(yaw + 90.0F)) + strafe * Math.sin(Math.toRadians(yaw + 90.0F)));
-        mc.player.motionZ = (forward * Math.sin(Math.toRadians(yaw + 90.0F)) - strafe * Math.cos(Math.toRadians(yaw + 90.0F)));
-        mc.player.connection.sendPacket(new CPacketPlayer(true));
+        double cos = Math.cos(Math.toRadians(yaw + 90.0F));
+        double sin = Math.sin(Math.toRadians(yaw + 90.0F));
+        mc.player.motionX = (forward * cos + strafe * sin);
+        mc.player.motionZ = (forward * sin - strafe * cos);
+
+        if(((SBoolean)settings[1]).active) {
+            mc.player.connection.sendPacket(new CPacketPlayer(true));
+        }
     }
 }
