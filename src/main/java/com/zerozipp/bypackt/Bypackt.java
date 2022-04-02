@@ -23,7 +23,7 @@ public class Bypackt {
     private IReloadableResourceManager resourceManager;
     private final MetadataSerializer metadataSerializer = new MetadataSerializer();
     private static Bypackt bypackt = new Bypackt(Minecraft.getMinecraft());
-    private static Version version = new Version(1, 4, 1, Version.NIGHTLY);
+    private static Version version = new Version(1, 4, 2, Version.NIGHTLY);
 
     public static Version getVersion() {
         return version;
