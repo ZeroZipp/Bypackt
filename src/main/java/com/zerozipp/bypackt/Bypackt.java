@@ -23,7 +23,7 @@ public class Bypackt {
     private IReloadableResourceManager resourceManager;
     private final MetadataSerializer metadataSerializer = new MetadataSerializer();
     private static Bypackt bypackt = new Bypackt(Minecraft.getMinecraft());
-    private static Version version = new Version(1, 4, 0, Version.NIGHTLY);
+    private static Version version = new Version(1, 4, 1, Version.NIGHTLY);
 
     public static Version getVersion() {
         return version;
@@ -45,8 +45,7 @@ public class Bypackt {
     }
 
     public void onLoad() {
-        //fontLocation = new ResourceLocation("bypackt", "textures/font/bypackt.png");
-        fontLocation = new ResourceLocation("textures/font/ascii.png");
+        fontLocation = new ResourceLocation("bypackt", "textures/font/bypackt.png");
         font = new FontRenderer(mc.gameSettings, fontLocation, mc.renderEngine, false);
         this.resourceManager = new SimpleReloadableResourceManager(metadataSerializer);
         resourceManager.registerReloadListener(font);

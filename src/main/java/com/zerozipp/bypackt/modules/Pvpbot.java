@@ -31,8 +31,9 @@ public class Pvpbot extends Module {
             new SString("Mode", 0, new String[] {"Single", "Distance"}),
             new SString("Delay", 2, new String[] {"Off", "Fast", "Normal", "Smooth", "Slow", "Lazy"}),
             new SInteger("Reach", 4, 1, 8),
+            new SBoolean("Sprint", true),
             new SBoolean("Jump", false),
-                new SBoolean("Swim", true),
+            new SBoolean("Swim", true),
             new SBoolean("Players", true),
             new SBoolean("Entitys", true),
             new SBoolean("Mobs", true)
@@ -58,15 +59,15 @@ public class Pvpbot extends Module {
         for(Entity target : mc.world.loadedEntityList) {
             if(!done && target != mc.player) {
                 if(!target.isDead && target.isEntityAlive()) {
-                    if (target instanceof EntityPlayer && ((SBoolean) settings[5]).active) {
+                    if (target instanceof EntityPlayer && ((SBoolean) settings[6]).active) {
                         hit = target;
                         done = true;
                     }
-                    if (target instanceof EntityAnimal && ((SBoolean) settings[6]).active) {
+                    if (target instanceof EntityAnimal && ((SBoolean) settings[7]).active) {
                         hit = target;
                         done = true;
                     }
-                    if (target instanceof EntityMob && ((SBoolean) settings[7]).active) {
+                    if (target instanceof EntityMob && ((SBoolean) settings[8]).active) {
                         hit = target;
                         done = true;
                     }
@@ -76,11 +77,14 @@ public class Pvpbot extends Module {
         if(hit != null) {
             if(mc.currentScreen == null) {
                 keys.setPressed(mc.gameSettings.keyBindForward, true);
+                if (((SBoolean) settings[3]).active) {
+                    mc.player.setSprinting(true);
+                }
                 if (mc.player.isInWater()) {
-                    if (((SBoolean) settings[4]).active) {
+                    if (((SBoolean) settings[5]).active) {
                         keys.setPressed(mc.gameSettings.keyBindJump, true);
                     }
-                } else if (mc.player.onGround && ((SBoolean) settings[3]).active) {
+                } else if (mc.player.onGround && ((SBoolean) settings[4]).active) {
                     if (!mc.player.isInWater() && !mc.player.isInLava() && !mc.player.isOnLadder()) {
                         mc.player.jump();
                     }
