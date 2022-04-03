@@ -35,7 +35,7 @@ public class Pvpbot extends Module {
             new SBoolean("Jump", false),
             new SBoolean("Swim", true),
             new SBoolean("Players", true),
-            new SBoolean("Entitys", true),
+            new SBoolean("Animals", true),
             new SBoolean("Mobs", true)
         };
     }

@@ -23,7 +23,7 @@ public class Chams extends Module {
             new SString("Mode", 0, new String[] {"Normal", "Light", "Color"}),
             new SString("Color", 0, new String[] {"Red", "Green", "Blue"}),
             new SBoolean("Players", true),
-            new SBoolean("Entitys", true),
+            new SBoolean("Animals", true),
             new SBoolean("Mobs", true)
         };
     }

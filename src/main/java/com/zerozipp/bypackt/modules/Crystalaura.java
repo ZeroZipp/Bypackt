@@ -38,7 +38,7 @@ public class Crystalaura extends Module {
             new SString("Delay", 2, new String[] {"Off", "Fast", "Normal", "Smooth", "Slow", "Lazy"}),
             new SInteger("Reach", 4, 1, 8),
             new SBoolean("Players", true),
-            new SBoolean("Entitys", true),
+            new SBoolean("Animals", true),
             new SBoolean("Mobs", true),
             new SBoolean("Auto", true)
         };
