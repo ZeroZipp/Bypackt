@@ -1,6 +1,7 @@
 package com.zerozipp.bypackt.modules;
 
 import com.zerozipp.bypackt.Module;
+import com.zerozipp.bypackt.settings.SBoolean;
 import com.zerozipp.bypackt.settings.SString;
 import com.zerozipp.bypackt.settings.Setting;
 import com.zerozipp.bypackt.util.Rotation;
@@ -19,7 +20,8 @@ public class Scaffold extends Module {
     public Scaffold(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
         super(mcIn, nameIn, idIn, activeIn);
         settings = new Setting[] {
-                new SString("Mode", 0, new String[] {"Normal", "Legit"})
+                new SString("Mode", 0, new String[] {"Normal", "Legit"}),
+                new SBoolean("Tower", false)
         };
     }
 
@@ -67,6 +69,12 @@ public class Scaffold extends Module {
 
                     if(enumactionresult == EnumActionResult.SUCCESS) {
                         mc.player.swingArm(enumhand);
+                        if(((SBoolean)settings[1]).active) {
+                            if(mc.gameSettings.keyBindJump.isKeyDown() && !mc.player.isInWater() && !mc.player.isInLava() && !mc.player.isOnLadder()) {
+                                mc.player.onGround = true;
+                                mc.player.jump();
+                            }
+                        }
 
                         if(!itemstack.isEmpty() && (itemstack.getCount() != i || mc.playerController.isInCreativeMode())) {
                             mc.entityRenderer.itemRenderer.resetEquippedProgress(enumhand);

@@ -83,8 +83,8 @@ public class Hud extends Module {
             mc.ingameGUI.drawString(bypackt.font, bypackt.name, 7, 7, color);
             mc.ingameGUI.drawString(bypackt.font, text, bypackt.font.getStringWidth(bypackt.name) + 9, 7, 16777215);
 
-            mc.ingameGUI.drawString(bypackt.font, "X: " + pos.getX() + " Y: " + pos.getY() + " Z: " + pos.getZ(), 5, 24, 16777215);
-            mc.ingameGUI.drawString(bypackt.font, "Fps: " + fps, 5, 34, 16777215);
+            mc.ingameGUI.drawString(bypackt.font, "X: " + pos.getX() + " Y: " + pos.getY() + " Z: " + pos.getZ(), 5, 25, 16777215);
+            mc.ingameGUI.drawString(bypackt.font, "Fps: " + fps, 5, 35, 16777215);
         }
 
         int c = 0;

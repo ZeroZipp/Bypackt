@@ -64,6 +64,7 @@ public class Bypackt {
         modules.add(new Autowalk(mc, "Autowalk", Module.AUTO, false));
         modules.add(new Autoswim(mc, "Autoswim", Module.AUTO, false));
         modules.add(new Chams(mc, "Chams", Module.RENDER, false));
+        modules.add(new Distance(mc, "Distance", Module.RENDER, false));
         modules.add(new Crystalaura(mc, "Crystalaura", Module.COMBAT, false));
         modules.add(new Killaura(mc, "Killaura", Module.COMBAT, false));
         modules.add(new Pvpbot(mc, "Pvpbot", Module.COMBAT, false));
