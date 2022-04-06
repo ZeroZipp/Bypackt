@@ -56,6 +56,7 @@ public class Bypackt {
         modules.add(new Nofall(mc, "Nofall", Module.MOVEMENT, false));
         modules.add(new Sprint(mc, "Sprint", Module.MOVEMENT, false));
         modules.add(new Sneak(mc, "Sneak", Module.MOVEMENT, false));
+        modules.add(new Glide(mc, "Glide", Module.MOVEMENT, false));
         modules.add(new Autoarmor(mc, "Autoarmor", Module.AUTO, false));
         modules.add(new Autojump(mc, "Autojump", Module.AUTO, false));
         modules.add(new Autobreak(mc, "Autobreak", Module.AUTO, false));
