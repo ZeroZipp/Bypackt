@@ -18,7 +18,9 @@ public class Sprint extends Module {
         }
         if(((SString)settings[0]).value == 1) {
             if(mc.gameSettings.keyBindLeft.isKeyDown() || mc.gameSettings.keyBindBack.isKeyDown() || mc.gameSettings.keyBindRight.isKeyDown()) {
-                mc.player.setSprinting(true);
+                if(mc.player.sprintingTicksLeft > 0) {
+                    mc.player.setSprinting(true);
+                }
             }
         }
     }
