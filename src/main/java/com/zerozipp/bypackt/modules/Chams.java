@@ -1,9 +1,7 @@
 package com.zerozipp.bypackt.modules;
 
 import com.zerozipp.bypackt.Module;
-import com.zerozipp.bypackt.settings.SBoolean;
-import com.zerozipp.bypackt.settings.SString;
-import com.zerozipp.bypackt.settings.Setting;
+import com.zerozipp.bypackt.settings.*;
 import com.zerozipp.bypackt.util.Render;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;

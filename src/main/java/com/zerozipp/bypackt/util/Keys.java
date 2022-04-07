@@ -1,7 +1,6 @@
 package com.zerozipp.bypackt.util;
 
 import java.lang.reflect.Field;
-
 import com.zerozipp.bypackt.Bypackt;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;

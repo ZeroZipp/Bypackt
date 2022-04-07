@@ -2,11 +2,9 @@ package com.zerozipp.bypackt.modules;
 
 import com.zerozipp.bypackt.Bypackt;
 import com.zerozipp.bypackt.Module;
-import com.zerozipp.bypackt.settings.SString;
-import com.zerozipp.bypackt.settings.Setting;
+import com.zerozipp.bypackt.settings.*;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
-
 import java.util.ArrayList;
 import java.util.Collections;
 

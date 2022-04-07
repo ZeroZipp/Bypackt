@@ -1,9 +1,6 @@
 package com.zerozipp.bypackt;
 
-import com.zerozipp.bypackt.settings.SBoolean;
-import com.zerozipp.bypackt.settings.SInteger;
-import com.zerozipp.bypackt.settings.SString;
-import com.zerozipp.bypackt.settings.Setting;
+import com.zerozipp.bypackt.settings.*;
 import net.minecraft.client.gui.GuiScreen;
 import java.io.IOException;
 import java.util.ArrayList;

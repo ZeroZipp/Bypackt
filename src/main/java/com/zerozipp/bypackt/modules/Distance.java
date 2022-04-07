@@ -3,11 +3,9 @@ package com.zerozipp.bypackt.modules;
 import com.zerozipp.bypackt.Bypackt;
 import com.zerozipp.bypackt.Module;
 import com.zerozipp.bypackt.settings.*;
-import com.zerozipp.bypackt.settings.Setting;
 import com.zerozipp.bypackt.util.Timer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.util.math.RayTraceResult;
 
 public class Distance extends Module {
     public Bypackt bypackt;

@@ -2,7 +2,6 @@ package com.zerozipp.bypackt.modules;
 
 import com.zerozipp.bypackt.Module;
 import com.zerozipp.bypackt.settings.*;
-import com.zerozipp.bypackt.settings.Setting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.play.client.CPacketPlayer;
 
