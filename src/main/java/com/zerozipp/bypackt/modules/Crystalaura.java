@@ -14,6 +14,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.*;
+import net.minecraft.util.math.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
