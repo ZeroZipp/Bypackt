@@ -9,6 +9,8 @@ public class Airjump extends Module {
     }
 
     public void onUpdate() {
-        mc.player.onGround = true;
+        if(!Flight.isActive && !Motion.isActive) {
+            mc.player.onGround = true;
+        }
     }
 }

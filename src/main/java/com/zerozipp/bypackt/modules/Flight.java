@@ -6,12 +6,20 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.play.client.CPacketPlayer;
 
 public class Flight extends Module {
+    public static boolean isActive;
+    
     public Flight(Minecraft mcIn, String nameIn, int idIn, boolean activeIn) {
         super(mcIn, nameIn, idIn, activeIn);
         settings = new Setting[] {
                 new SString("Speed", 1, new String[] {"Slow", "Normal", "Fast"}),
                 new SBoolean("Nodamage", true)
         };
+    }
+
+    @Override
+    public void setActive(boolean activeIn) {
+        super.setActive(activeIn);
+        isActive = active;
     }
 
     public void onUpdate() {
