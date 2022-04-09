@@ -64,7 +64,7 @@ public class Scaffold extends Module {
 
                     if(enumactionresult == EnumActionResult.SUCCESS) {
                         mc.player.swingArm(enumhand);
-                        if(((SBoolean)settings[1]).active) {
+                        if(((SBoolean)settings[1]).active && !Motion.isActive && !Flight.isActive) {
                             if(mc.gameSettings.keyBindJump.isKeyDown() && !mc.player.isInWater() && !mc.player.isInLava() && !mc.player.isOnLadder()) {
                                 mc.player.onGround = true;
                                 mc.player.jump();

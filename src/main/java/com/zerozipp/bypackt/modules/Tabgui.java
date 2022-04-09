@@ -136,9 +136,9 @@ public class Tabgui extends Module {
         select[1] = tab ? select[1] : 0;
 
         int c = 0;
-        mc.ingameGUI.drawRect(xOff-1, yOff - 2, xOff + size, yOff, 0x99000000);
-        mc.ingameGUI.drawRect(xOff-1, yOff, xOff + size, yOff + (names.size()*height), 0x99000000);
-        mc.ingameGUI.drawRect(xOff-1, yOff + (names.size()*height), xOff + size, yOff + (names.size()*height) + 2, 0x99000000);
+        mc.ingameGUI.drawRect(xOff, yOff - 2, xOff + size - 1, yOff - 1, 0x99000000);
+        mc.ingameGUI.drawRect(xOff - 1, yOff - 1, xOff + size, yOff + (names.size()*height) + 1, 0x99000000);
+        mc.ingameGUI.drawRect(xOff, yOff + (names.size()*height) + 1, xOff + size - 1, yOff + (names.size()*height) + 2, 0x99000000);
 
         mc.ingameGUI.drawRect(xOff + 1, yOff + (select[0]*height), xOff + 3, yOff + (select[0]*height) + height, color);
         for(String n : names) {
@@ -151,9 +151,9 @@ public class Tabgui extends Module {
             ArrayList<Module> mod = list.get(off);
 
             c = 0;
-            mc.ingameGUI.drawRect(xOff + size, yOff + (off*height) - 2, xOff + size*2, yOff + (off*height), 0x99000000);
-            mc.ingameGUI.drawRect(xOff + size, yOff + (off*height), xOff + size*2, yOff + (off*height) + (mod.size()*height), 0x99000000);
-            mc.ingameGUI.drawRect(xOff + size, yOff + (off*height) + (mod.size()*height), xOff + size*2, yOff + (off*height) + (mod.size()*height) + 2, 0x99000000);
+            mc.ingameGUI.drawRect(xOff + size + 1, yOff + (off*height) - 2, xOff + size*2 - 1, yOff + (off*height) - 1, 0x99000000);
+            mc.ingameGUI.drawRect(xOff + size, yOff + (off*height) - 1, xOff + size*2, yOff + (off*height) + (mod.size()*height) + 1, 0x99000000);
+            mc.ingameGUI.drawRect(xOff + size + 1, yOff + (off*height) + (mod.size()*height) + 1, xOff + size * 2 - 1, yOff + (off*height) + (mod.size()*height) + 2, 0x99000000);
 
             mc.ingameGUI.drawRect(xOff + size + 1, yOff + (off*height) + (select[1]*height), xOff + size + 3, yOff + (off*height) + (select[1]*height) + height, color);
             for(Module m : mod) {

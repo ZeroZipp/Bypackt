@@ -9,7 +9,7 @@ import java.util.Collections;
 public class Clickgui extends GuiScreen {
     private static int defColor = 0xf00080ff;
     private static int color = defColor;
-    public static int size = 83;
+    public static int size = 85;
     public static int boxHeight = 16;
     public static int offset = 4;
     public Bypackt bypackt;
@@ -72,8 +72,8 @@ public class Clickgui extends GuiScreen {
 
         int c = 0;
         for(String n : names) {
-            boolean isOpen = modules.get(c).open;
-            drawRect(xOff + (c*(size + 5)), yOff, xOff + (c*(size + 5)) + size, yOff + boxHeight, color);
+            drawRect(xOff + (c*(size + 5)), yOff + 1, xOff + (c*(size + 5)) + size, yOff + boxHeight, color);
+            drawRect(xOff + (c*(size + 5)) + 1, yOff, xOff + (c*(size + 5)) + size - 1, yOff + 1, color);
             drawString(bypackt.font, n, xOff + (c*(size + 5)) + 5, yOff + offset, 16777215);
             drawString(bypackt.font, active.get(c) ? ">" : "<", xOff + (c*(size + 5)) + size - 10, yOff + offset, 16777215);
             c += 1;
@@ -105,7 +105,7 @@ public class Clickgui extends GuiScreen {
                                 SValue = b.list[b.value];
                             }
                             drawRect(xOff + (i * (size + 5)), yOff + (c * boxHeight), xOff + (i * (size + 5)) + size, yOff + (c * boxHeight) + boxHeight, 0x99111111);
-                            drawString(bypackt.font, setting.name + ": " + SValue, xOff + (i * (size + 5)) + 7, yOff + (c * boxHeight) + offset, 16777215);
+                            drawString(bypackt.font, setting.name + ": " + SValue, xOff + (i * (size + 5)) + 6, yOff + (c * boxHeight) + offset, 16777215);
                             c += 1;
                         }
                     }
