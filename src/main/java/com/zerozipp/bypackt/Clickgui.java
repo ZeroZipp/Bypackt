@@ -9,7 +9,9 @@ import java.util.Collections;
 public class Clickgui extends GuiScreen {
     private static int defColor = 0xf00080ff;
     private static int color = defColor;
-    public static int size = 90;
+    public static int size = 83;
+    public static int boxHeight = 16;
+    public static int offset = 4;
     public Bypackt bypackt;
     public ArrayList<Module> modules;
     public int xOff, yOff;
@@ -71,9 +73,9 @@ public class Clickgui extends GuiScreen {
         int c = 0;
         for(String n : names) {
             boolean isOpen = modules.get(c).open;
-            drawRect(xOff + (c*(size + 5)), yOff, xOff + (c*(size + 5)) + size, yOff + 18, color);
-            drawString(bypackt.font, n, xOff + (c*(size + 5)) + 5, yOff + 5, 16777215);
-            drawString(bypackt.font, active.get(c) ? ">" : "<", xOff + (c*(size + 5)) + size-10, yOff + 5, 16777215);
+            drawRect(xOff + (c*(size + 5)), yOff, xOff + (c*(size + 5)) + size, yOff + boxHeight, color);
+            drawString(bypackt.font, n, xOff + (c*(size + 5)) + 5, yOff + offset, 16777215);
+            drawString(bypackt.font, active.get(c) ? ">" : "<", xOff + (c*(size + 5)) + size - 10, yOff + offset, 16777215);
             c += 1;
         }
 
@@ -82,8 +84,8 @@ public class Clickgui extends GuiScreen {
             if(active.get(i)) {
                 for(Object n : list.get(i)) {
                     Module m = (Module) n;
-                    drawRect(xOff + (i * (size + 5)), yOff + (c * 18), xOff + (i * (size + 5)) + size, yOff + (c * 18) + 18, 0x99000000);
-                    drawString(bypackt.font, m.name, xOff + (i * (size + 5)) + 5, yOff + (c * 18) + 5, (m.active) ? color : 16777215);
+                    drawRect(xOff + (i * (size + 5)), yOff + (c * boxHeight), xOff + (i * (size + 5)) + size, yOff + (c * boxHeight) + boxHeight, 0x99000000);
+                    drawString(bypackt.font, m.name, xOff + (i * (size + 5)) + 5, yOff + (c * boxHeight) + offset, (m.active) ? color : 16777215);
                     c += 1;
                     if(m.open && m.settings != null) {
                         for(Setting setting : m.settings) {
@@ -102,8 +104,8 @@ public class Clickgui extends GuiScreen {
                                 SString b = (SString) setting;
                                 SValue = b.list[b.value];
                             }
-                            drawRect(xOff + (i * (size + 5)), yOff + (c * 18), xOff + (i * (size + 5)) + size, yOff + (c * 18) + 18, 0x99111111);
-                            drawString(bypackt.font, setting.name + ": " + SValue, xOff + (i * (size + 5)) + 8, yOff + (c * 18) + 5, 16777215);
+                            drawRect(xOff + (i * (size + 5)), yOff + (c * boxHeight), xOff + (i * (size + 5)) + size, yOff + (c * boxHeight) + boxHeight, 0x99111111);
+                            drawString(bypackt.font, setting.name + ": " + SValue, xOff + (i * (size + 5)) + 7, yOff + (c * boxHeight) + offset, 16777215);
                             c += 1;
                         }
                     }
@@ -118,7 +120,7 @@ public class Clickgui extends GuiScreen {
         if(mouseButton == 0) {
             int c = 0;
             for(int i = 0; i < active.size(); i++) {
-                if (mouseX > xOff + (i * (size + 5)) && mouseY > yOff + (c * 18) && mouseX < xOff + (i * (size + 5)) + size && mouseY < yOff + (c * 18) + 18) {
+                if (mouseX > xOff + (i * (size + 5)) && mouseY > yOff + (c * boxHeight) && mouseX < xOff + (i * (size + 5)) + size && mouseY < yOff + (c * boxHeight) + boxHeight) {
                     active.set(i, !active.get(i));
                     module[i][1] = active.get(i);
                     c += 1;
@@ -130,14 +132,14 @@ public class Clickgui extends GuiScreen {
                 if(active.get(i)) {
                     for(Object n : list.get(i)) {
                         Module m = (Module) n;
-                        if(mouseX > xOff + (i*(size + 5)) && mouseY > yOff + (c*18) && mouseX < xOff + (i*(size + 5)) + size && mouseY < yOff + (c*18) + 18) {
+                        if(mouseX > xOff + (i*(size + 5)) && mouseY > yOff + (c*boxHeight) && mouseX < xOff + (i*(size + 5)) + size && mouseY < yOff + (c*boxHeight) + boxHeight) {
                             m.setActive(!m.active);
                         }
                         c += 1;
                         if(m.open && m.settings != null) {
                             int g = 0;
-                            for(Setting setting : m.settings) {
-                                if(mouseX > xOff + (i*(size + 5)) && mouseY > yOff + (c*18) && mouseX < xOff + (i*(size + 5)) + size && mouseY < yOff + (c*18) + 18) {
+                            for(Setting ignored : m.settings) {
+                                if(mouseX > xOff + (i*(size + 5)) && mouseY > yOff + (c*boxHeight) && mouseX < xOff + (i*(size + 5)) + size && mouseY < yOff + (c*boxHeight) + boxHeight) {
                                     m.runList(g);
                                 }
                                 g += 1;
@@ -154,7 +156,7 @@ public class Clickgui extends GuiScreen {
                 if(active.get(i)) {
                     for(Object n : list.get(i)) {
                         Module m = (Module) n;
-                        if(mouseX > xOff + (i*(size + 5)) && mouseY > yOff + (c*18) && mouseX < xOff + (i*(size + 5)) + size && mouseY < yOff + (c*18) + 18) {
+                        if(mouseX > xOff + (i*(size + 5)) && mouseY > yOff + (c*boxHeight) && mouseX < xOff + (i*(size + 5)) + size && mouseY < yOff + (c*boxHeight) + boxHeight) {
                             if(m.settings != null) {
                                 m.open = !m.open;
                             }
