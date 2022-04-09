@@ -23,7 +23,7 @@ public class Bypackt {
     private IReloadableResourceManager resourceManager;
     private final MetadataSerializer metadataSerializer = new MetadataSerializer();
     private static Bypackt bypackt = new Bypackt(Minecraft.getMinecraft());
-    private static Version version = new Version(1, 4, 2, Version.NIGHTLY);
+    private static Version version = new Version(1, 4, 3, Version.NIGHTLY);
 
     public static Version getVersion() {
         return version;
@@ -57,6 +57,7 @@ public class Bypackt {
         modules.add(new Sprint(mc, "Sprint", Module.MOVEMENT, false));
         modules.add(new Sneak(mc, "Sneak", Module.MOVEMENT, false));
         modules.add(new Glide(mc, "Glide", Module.MOVEMENT, false));
+        modules.add(new Motion(mc, "Motion", Module.MOVEMENT, false));
         modules.add(new Autoarmor(mc, "Autoarmor", Module.AUTO, false));
         modules.add(new Autojump(mc, "Autojump", Module.AUTO, false));
         modules.add(new Autobreak(mc, "Autobreak", Module.AUTO, false));
