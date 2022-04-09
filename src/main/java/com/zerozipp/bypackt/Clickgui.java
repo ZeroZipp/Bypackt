@@ -70,6 +70,7 @@ public class Clickgui extends GuiScreen {
 
         int c = 0;
         for(String n : names) {
+            boolean isOpen = modules.get(c).open;
             drawRect(xOff + (c*(size + 5)), yOff, xOff + (c*(size + 5)) + size, yOff + 18, color);
             drawString(bypackt.font, n, xOff + (c*(size + 5)) + 5, yOff + 5, 16777215);
             drawString(bypackt.font, active.get(c) ? ">" : "<", xOff + (c*(size + 5)) + size-10, yOff + 5, 16777215);
